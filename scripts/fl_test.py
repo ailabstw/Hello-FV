@@ -346,8 +346,8 @@ if __name__ == "__main__":
             tpr_list = []
             for i in range(10):
                 fpr, tpr, thresholds = metrics.roc_curve(y_pred, y_probobility, pos_label=i)
-                fpr_list.append(fpr.cpu().numpy())
-                tpr_list.append(tpr.cpu().numpy())
+                fpr_list.append(fpr)
+                tpr_list.append(tpr)
 
             result = {
                 "dataNum":len(test_loader.dataset)*10,
