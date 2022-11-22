@@ -295,7 +295,6 @@ if __name__ == "__main__":
     model.load_state_dict(torch.load("/merge.ckpt")["state_dict"])
 
     model.eval()
-    #y_pred_dic = {}
     y_pred = []
     y_probobility = []
     y_true = []
@@ -313,7 +312,7 @@ if __name__ == "__main__":
             # Saving probobilities for roc curve
             for i in range(len(pred_list)):
                 pred = pred_list[i]
-                y_probobility.append(output[i][pred])
+                y_probobility.append(output[i][pred].cpu().numpy())
 
             print("output[0]= ")
             print(output[0])
@@ -347,8 +346,8 @@ if __name__ == "__main__":
             tpr_list = []
             for i in range(10):
                 fpr, tpr, thresholds = metrics.roc_curve(y_pred, y_probobility, pos_label=i)
-                fpr_list.append(fpr)
-                tpr_list.append(tpr)
+                fpr_list.append(fpr.cpu().numpy())
+                tpr_list.append(tpr.cpu().numpy())
 
             result = {
                 "dataNum":len(test_loader.dataset)*10,
@@ -367,8 +366,8 @@ if __name__ == "__main__":
                             "roc":{
                                 "x-label" : "fpr",
                                 "y-label": "tpr",
-                                "x-values":fpr_list[0],
-                                "y-values":tpr_list[0],
+                                "x-values":fpr_list[0].tolist(),
+                                "y-values":tpr_list[0].tolist(),
                             }
                         },
                         "table": {
@@ -381,8 +380,8 @@ if __name__ == "__main__":
                             "roc":{
                                 "x-label" : "fpr",
                                 "y-label": "tpr",
-                                "x-values":fpr_list[1],
-                                "y-values":tpr_list[1],
+                                "x-values":fpr_list[1].tolist(),
+                                "y-values":tpr_list[1].tolist(),
                             }
                         },
                         "table": {
@@ -395,8 +394,8 @@ if __name__ == "__main__":
                             "roc":{
                                 "x-label" : "fpr",
                                 "y-label": "tpr",
-                                "x-values":fpr_list[2],
-                                "y-values":tpr_list[2],
+                                "x-values":fpr_list[2].tolist(),
+                                "y-values":tpr_list[2].tolist(),
                             }
                         },
                         "table": {
@@ -409,8 +408,8 @@ if __name__ == "__main__":
                             "roc":{
                                 "x-label" : "fpr",
                                 "y-label": "tpr",
-                                "x-values":fpr_list[3],
-                                "y-values":tpr_list[3],
+                                "x-values":fpr_list[3].tolist(),
+                                "y-values":tpr_list[3].tolist(),
                             }
                         },
                         "table": {
@@ -423,8 +422,8 @@ if __name__ == "__main__":
                             "roc":{
                                 "x-label" : "fpr",
                                 "y-label": "tpr",
-                                "x-values":fpr_list[4],
-                                "y-values":tpr_list[4],
+                                "x-values":fpr_list[4].tolist(),
+                                "y-values":tpr_list[4].tolist(),
                             }
                         },
                         "table": {
@@ -437,8 +436,8 @@ if __name__ == "__main__":
                             "roc":{
                                 "x-label" : "fpr",
                                 "y-label": "tpr",
-                                "x-values":fpr_list[5],
-                                "y-values":tpr_list[5],
+                                "x-values":fpr_list[5].tolist(),
+                                "y-values":tpr_list[5].tolist(),
                             }
                         },
                         "table": {
@@ -451,8 +450,8 @@ if __name__ == "__main__":
                             "roc":{
                                 "x-label" : "fpr",
                                 "y-label": "tpr",
-                                "x-values":fpr_list[6],
-                                "y-values":tpr_list[6],
+                                "x-values":fpr_list[6].tolist(),
+                                "y-values":tpr_list[6].tolist(),
                             }
                         },
                         "table": {
@@ -465,8 +464,8 @@ if __name__ == "__main__":
                             "roc":{
                                 "x-label" : "fpr",
                                 "y-label": "tpr",
-                                "x-values":fpr_list[7],
-                                "y-values":tpr_list[7],
+                                "x-values":fpr_list[7].tolist(),
+                                "y-values":tpr_list[7].tolist(),
                             }
                         },
                         "table": {
@@ -479,8 +478,8 @@ if __name__ == "__main__":
                             "roc":{
                                 "x-label" : "fpr",
                                 "y-label": "tpr",
-                                "x-values":fpr_list[8],
-                                "y-values":tpr_list[8],
+                                "x-values":fpr_list[8].tolist(),
+                                "y-values":tpr_list[8].tolist(),
                             }
                         },
                         "table": {
@@ -493,8 +492,8 @@ if __name__ == "__main__":
                             "roc":{
                                 "x-label" : "fpr",
                                 "y-label": "tpr",
-                                "x-values":fpr_list[9],
-                                "y-values":tpr_list[9],
+                                "x-values":fpr_list[9].tolist(),
+                                "y-values":tpr_list[9].tolist(),
                             }
                         },
                         "table": {
