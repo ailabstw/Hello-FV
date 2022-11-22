@@ -241,7 +241,7 @@ def test(model, device, test_loader):
 
 
 
-def main():
+if __name__ == "__main__":
     print("validation started ...")
     # Training settings
     parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
@@ -268,11 +268,10 @@ def main():
     args, unparsed = parser.parse_known_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
 
-    test_kwargs = {'batch_size': args.test_batch_size}
-
     torch.manual_seed(args.seed)
 
     device = torch.device("cuda" if use_cuda else "cpu")
+    test_kwargs = {'batch_size': args.test_batch_size}
 
     if use_cuda:
         cuda_kwargs = {'num_workers': 1,
@@ -287,7 +286,6 @@ def main():
         dataset = datasets.MNIST('/data', train=False, download=False, transform=transform)
     except Exception as err:
         print("load dataset failed")
-        return
 
     test_loader = torch.utils.data.DataLoader(dataset, **test_kwargs)
     model = Net().to(device)
