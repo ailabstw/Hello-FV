@@ -317,195 +317,195 @@ if __name__ == "__main__":
             print("output[0]= ")
             print(output[0])
 
-            general_confusion_matrix = [[0,0],[0,0]]
-            precision_list = []
-            recall_list = []
-            f1_score_list = []
+        general_confusion_matrix = [[0,0],[0,0]]
+        precision_list = []
+        recall_list = []
+        f1_score_list = []
 
-            cf_matrix = metrics.multilabel_confusion_matrix(y_true, y_pred)
-            for matrix in cf_matrix:
-                precision = matrix[1][1] / (matrix[0][1]+matrix[1][1])
-                recall = matrix[1][1] / (matrix[1][1] + matrix[1][0])
-                f1_score = 2 * ( precision * recall ) / ( precision + recall )
+        cf_matrix = metrics.multilabel_confusion_matrix(y_true, y_pred)
+        for matrix in cf_matrix:
+            precision = matrix[1][1] / (matrix[0][1]+matrix[1][1])
+            recall = matrix[1][1] / (matrix[1][1] + matrix[1][0])
+            f1_score = 2 * ( precision * recall ) / ( precision + recall )
 
-                precision_list.append(precision)
-                recall_list.append(recall)
-                f1_score_list.append(f1_score)
+            precision_list.append(precision)
+            recall_list.append(recall)
+            f1_score_list.append(f1_score)
 
-                general_confusion_matrix[0][0] = general_confusion_matrix[0][0] + matrix[0][0]  # TN = True Negative
-                general_confusion_matrix[0][1] = general_confusion_matrix[0][1] + matrix[0][1]  # FP = False Positive
-                general_confusion_matrix[1][0] = general_confusion_matrix[1][0] + matrix[1][0]  # FN = False Negative
-                general_confusion_matrix[1][1] = general_confusion_matrix[1][1] + matrix[1][1]  # TP = True Positive
+            general_confusion_matrix[0][0] = general_confusion_matrix[0][0] + matrix[0][0]  # TN = True Negative
+            general_confusion_matrix[0][1] = general_confusion_matrix[0][1] + matrix[0][1]  # FP = False Positive
+            general_confusion_matrix[1][0] = general_confusion_matrix[1][0] + matrix[1][0]  # FN = False Negative
+            general_confusion_matrix[1][1] = general_confusion_matrix[1][1] + matrix[1][1]  # TP = True Positive
 
-            general_precision = general_confusion_matrix[1][1] / (general_confusion_matrix[0][1]+general_confusion_matrix[1][1])
-            general_recall = general_confusion_matrix[1][1] / (general_confusion_matrix[1][1] + general_confusion_matrix[1][0])
-            general_f1_score = 2 * ( precision * recall ) / ( precision + recall )
+        general_precision = general_confusion_matrix[1][1] / (general_confusion_matrix[0][1]+general_confusion_matrix[1][1])
+        general_recall = general_confusion_matrix[1][1] / (general_confusion_matrix[1][1] + general_confusion_matrix[1][0])
+        general_f1_score = 2 * ( precision * recall ) / ( precision + recall )
 
 
-            fpr_list = []
-            tpr_list = []
-            for i in range(10):
-                fpr, tpr, thresholds = metrics.roc_curve(y_pred, y_probobility, pos_label=i)
-                fpr_list.append(fpr)
-                tpr_list.append(tpr)
+        fpr_list = []
+        tpr_list = []
+        for i in range(10):
+            fpr, tpr, thresholds = metrics.roc_curve(y_pred, y_probobility, pos_label=i)
+            fpr_list.append(fpr)
+            tpr_list.append(tpr)
 
-            result = {
-                "dataNum":len(test_loader.dataset)*10,
-                "classification":{
-                    "statistics": {
-                        "mean": {
-                            "table":{
-                                "cols": ["f1","precision","recall"],
-                                "rows": [general_f1_score,general_precision,general_recall]
-                            }
+        result = {
+            "dataNum":len(test_loader.dataset)*10,
+            "classification":{
+                "statistics": {
+                    "mean": {
+                        "table":{
+                            "cols": ["f1","precision","recall"],
+                            "rows": [general_f1_score,general_precision,general_recall]
+                        }
+                    }
+                },
+                "classNames": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+                "0":{
+                    "draw":{
+                        "roc":{
+                            "x-label" : "fpr",
+                            "y-label": "tpr",
+                            "x-values":fpr_list[0].tolist(),
+                            "y-values":tpr_list[0].tolist(),
                         }
                     },
-                    "classNames": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-                    "0":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":fpr_list[0].tolist(),
-                                "y-values":tpr_list[0].tolist(),
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [f1_score_list[0], precision_list[0], recall_list[0]]
+                    "table": {
+                        "cols": ["f1", "precision", "recall"],
+                        "rows": [f1_score_list[0], precision_list[0], recall_list[0]]
+                    }
+                },
+                "1":{
+                    "draw":{
+                        "roc":{
+                            "x-label" : "fpr",
+                            "y-label": "tpr",
+                            "x-values":fpr_list[1].tolist(),
+                            "y-values":tpr_list[1].tolist(),
                         }
                     },
-                    "1":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":fpr_list[1].tolist(),
-                                "y-values":tpr_list[1].tolist(),
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [f1_score_list[1], precision_list[1], recall_list[1]]
+                    "table": {
+                        "cols": ["f1", "precision", "recall"],
+                        "rows": [f1_score_list[1], precision_list[1], recall_list[1]]
+                    }
+                },
+                "2":{
+                    "draw":{
+                        "roc":{
+                            "x-label" : "fpr",
+                            "y-label": "tpr",
+                            "x-values":fpr_list[2].tolist(),
+                            "y-values":tpr_list[2].tolist(),
                         }
                     },
-                    "2":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":fpr_list[2].tolist(),
-                                "y-values":tpr_list[2].tolist(),
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [f1_score_list[2], precision_list[2], recall_list[2]]
+                    "table": {
+                        "cols": ["f1", "precision", "recall"],
+                        "rows": [f1_score_list[2], precision_list[2], recall_list[2]]
+                    }
+                },
+                "3":{
+                    "draw":{
+                        "roc":{
+                            "x-label" : "fpr",
+                            "y-label": "tpr",
+                            "x-values":fpr_list[3].tolist(),
+                            "y-values":tpr_list[3].tolist(),
                         }
                     },
-                    "3":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":fpr_list[3].tolist(),
-                                "y-values":tpr_list[3].tolist(),
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [f1_score_list[3], precision_list[3], recall_list[3]]
+                    "table": {
+                        "cols": ["f1", "precision", "recall"],
+                        "rows": [f1_score_list[3], precision_list[3], recall_list[3]]
+                    }
+                },
+                "4":{
+                    "draw":{
+                        "roc":{
+                            "x-label" : "fpr",
+                            "y-label": "tpr",
+                            "x-values":fpr_list[4].tolist(),
+                            "y-values":tpr_list[4].tolist(),
                         }
                     },
-                    "4":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":fpr_list[4].tolist(),
-                                "y-values":tpr_list[4].tolist(),
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [f1_score_list[4], precision_list[4], recall_list[4]]
+                    "table": {
+                        "cols": ["f1", "precision", "recall"],
+                        "rows": [f1_score_list[4], precision_list[4], recall_list[4]]
+                    }
+                },
+                "5":{
+                    "draw":{
+                        "roc":{
+                            "x-label" : "fpr",
+                            "y-label": "tpr",
+                            "x-values":fpr_list[5].tolist(),
+                            "y-values":tpr_list[5].tolist(),
                         }
                     },
-                    "5":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":fpr_list[5].tolist(),
-                                "y-values":tpr_list[5].tolist(),
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [f1_score_list[5], precision_list[5], recall_list[5]]
+                    "table": {
+                        "cols": ["f1", "precision", "recall"],
+                        "rows": [f1_score_list[5], precision_list[5], recall_list[5]]
+                    }
+                },
+                "6":{
+                    "draw":{
+                        "roc":{
+                            "x-label" : "fpr",
+                            "y-label": "tpr",
+                            "x-values":fpr_list[6].tolist(),
+                            "y-values":tpr_list[6].tolist(),
                         }
                     },
-                    "6":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":fpr_list[6].tolist(),
-                                "y-values":tpr_list[6].tolist(),
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [f1_score_list[6], precision_list[6], recall_list[6]]
+                    "table": {
+                        "cols": ["f1", "precision", "recall"],
+                        "rows": [f1_score_list[6], precision_list[6], recall_list[6]]
+                    }
+                },
+                "7":{
+                    "draw":{
+                        "roc":{
+                            "x-label" : "fpr",
+                            "y-label": "tpr",
+                            "x-values":fpr_list[7].tolist(),
+                            "y-values":tpr_list[7].tolist(),
                         }
                     },
-                    "7":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":fpr_list[7].tolist(),
-                                "y-values":tpr_list[7].tolist(),
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [f1_score_list[7], precision_list[7], recall_list[7]]
+                    "table": {
+                        "cols": ["f1", "precision", "recall"],
+                        "rows": [f1_score_list[7], precision_list[7], recall_list[7]]
+                    }
+                },
+                "8":{
+                    "draw":{
+                        "roc":{
+                            "x-label" : "fpr",
+                            "y-label": "tpr",
+                            "x-values":fpr_list[8].tolist(),
+                            "y-values":tpr_list[8].tolist(),
                         }
                     },
-                    "8":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":fpr_list[8].tolist(),
-                                "y-values":tpr_list[8].tolist(),
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [f1_score_list[8], precision_list[8], recall_list[8]]
+                    "table": {
+                        "cols": ["f1", "precision", "recall"],
+                        "rows": [f1_score_list[8], precision_list[8], recall_list[8]]
+                    }
+                },
+                "9":{
+                    "draw":{
+                        "roc":{
+                            "x-label" : "fpr",
+                            "y-label": "tpr",
+                            "x-values":fpr_list[9].tolist(),
+                            "y-values":tpr_list[9].tolist(),
                         }
                     },
-                    "9":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":fpr_list[9].tolist(),
-                                "y-values":tpr_list[9].tolist(),
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [f1_score_list[9], precision_list[9], recall_list[9]]
-                        }
-                    },
-                }
+                    "table": {
+                        "cols": ["f1", "precision", "recall"],
+                        "rows": [f1_score_list[9], precision_list[9], recall_list[9]]
+                    }
+                },
             }
+        }
 
-            with open('/result.json', 'w', encoding='utf-8') as f:
-                json.dump(result, f, ensure_ascii=False, indent=4)
+        with open('/var/result.json', 'w', encoding='utf-8') as f:
+            json.dump(result, f, ensure_ascii=False, indent=4)
 
 
 
