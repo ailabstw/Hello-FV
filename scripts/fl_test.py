@@ -300,7 +300,7 @@ if __name__ == "__main__":
     try:
         dataset = datasets.MNIST('/data', train=False, download=True, transform=transform)
     except Exception as err:
-        with open('error.log', 'a') as fd:
+        with open('/var/logs/error.log', 'a') as fd:
             fd.write(f"load dataset failed: " + str(err))
 
     test_loader = torch.utils.data.DataLoader(dataset, **test_kwargs)
@@ -311,7 +311,7 @@ if __name__ == "__main__":
     try:
         model.load_state_dict(torch.load("/var/model/merge.ckpt")["state_dict"])
     except Exception as err:
-        with open('error.log', 'a') as fd:
+        with open('/var/logs/error.log', 'a') as fd:
             fd.write(f"load model failed: " + str(err))
 
     model.eval()
@@ -345,7 +345,7 @@ if __name__ == "__main__":
                     y_probobility.append(output[i][pred].cpu().numpy())
 
         except Exception as err:
-            with open('error.log', 'a') as fd:
+            with open('/var/logs/error.log', 'a') as fd:
                 fd.write(f"validating failed: " + str(err))
 
         general_confusion_matrix = [[0,0],[0,0]]
