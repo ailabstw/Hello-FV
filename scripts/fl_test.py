@@ -300,14 +300,19 @@ if __name__ == "__main__":
     try:
         dataset = datasets.MNIST('/data', train=False, download=True, transform=transform)
     except Exception as err:
-        print("load dataset failed")
+        with open('error.log', 'a') as fd:
+            fd.write(f"load dataset failed: " + str(err))
 
     test_loader = torch.utils.data.DataLoader(dataset, **test_kwargs)
     model = Net().to(device)
     optimizer = optim.Adadelta(model.parameters(), lr=args.lr)
 
     # load testing model weight
-    model.load_state_dict(torch.load("/var/model/merge.ckpt")["state_dict"])
+    try:
+        model.load_state_dict(torch.load("/var/model/merge.ckpt")["state_dict"])
+    except Exception as err:
+        with open('error.log', 'a') as fd:
+            fd.write(f"load model failed: " + str(err))
 
     model.eval()
     y_pred = []
@@ -324,22 +329,24 @@ if __name__ == "__main__":
 
 
     with torch.no_grad():
-        for data, labels in test_loader:
-            data, labels = data.to(device), labels.to(device)
-            output = model(data)
-            pred_list = (torch.max(torch.exp(output), 1)[1]).data.cpu().numpy()
-            y_pred.extend(pred_list) # Save Prediction
+        try:
+            for data, labels in test_loader:
+                data, labels = data.to(device), labels.to(device)
+                output = model(data)
+                pred_list = (torch.max(torch.exp(output), 1)[1]).data.cpu().numpy()
+                y_pred.extend(pred_list) # Save Prediction
 
-            labels = labels.data.cpu().numpy()
-            y_true.extend(labels) # Save Truth
+                labels = labels.data.cpu().numpy()
+                y_true.extend(labels) # Save Truth
 
-            # Saving probobilities for roc curve
-            for i in range(len(pred_list)):
-                pred = pred_list[i]
-                y_probobility.append(output[i][pred].cpu().numpy())
+                # Saving probobilities for roc curve
+                for i in range(len(pred_list)):
+                    pred = pred_list[i]
+                    y_probobility.append(output[i][pred].cpu().numpy())
 
-            print("output[0]= ")
-            print(output[0])
+        except Exception as err:
+            with open('error.log', 'a') as fd:
+                fd.write(f"validating failed: " + str(err))
 
         general_confusion_matrix = [[0,0],[0,0]]
         precision_list = []
