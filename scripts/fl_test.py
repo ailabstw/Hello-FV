@@ -243,6 +243,14 @@ def test(model, device, test_loader):
 
 if __name__ == "__main__":
     print("validation started ...")
+
+    progress = {
+        "status": "initialization",
+        "completedPercentage": 0
+    }
+    with open('/var/output/progress.json', 'w', encoding='utf-8') as f:
+        json.dump(progress, f, ensure_ascii=False, indent=4)
+
     # Training settings
     parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
     parser.add_argument('--batch-size', type=int, default=64, metavar='N',
@@ -279,6 +287,13 @@ if __name__ == "__main__":
                        'shuffle': True}
         test_kwargs.update(cuda_kwargs)
 
+    progress = {
+        "status": "preprocessing",
+        "completedPercentage": 0
+    }
+    with open('/var/output/progress.json', 'w', encoding='utf-8') as f:
+        json.dump(progress, f, ensure_ascii=False, indent=4)
+
 
     dataset = None
     transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
@@ -292,12 +307,21 @@ if __name__ == "__main__":
     optimizer = optim.Adadelta(model.parameters(), lr=args.lr)
 
     # load testing model weight
-    model.load_state_dict(torch.load("/merge.ckpt")["state_dict"])
+    model.load_state_dict(torch.load("/var/model/merge.ckpt")["state_dict"])
 
     model.eval()
     y_pred = []
     y_probobility = []
     y_true = []
+
+
+    progress = {
+        "status": "validating",
+        "completedPercentage": 0
+    }
+    with open('/var/output/progress.json', 'w', encoding='utf-8') as f:
+        json.dump(progress, f, ensure_ascii=False, indent=4)
+
 
     with torch.no_grad():
         for data, labels in test_loader:
@@ -348,6 +372,13 @@ if __name__ == "__main__":
             fpr, tpr, thresholds = metrics.roc_curve(y_pred, y_probobility, pos_label=i)
             fpr_list.append(fpr)
             tpr_list.append(tpr)
+
+        progress = {
+            "status": "completed",
+            "completedPercentage": 100
+        }
+        with open('/var/output/progress.json', 'w', encoding='utf-8') as f:
+            json.dump(progress, f, ensure_ascii=False, indent=4)
 
         result = {
             "dataNum":len(test_loader.dataset)*10,
@@ -504,7 +535,7 @@ if __name__ == "__main__":
             }
         }
 
-        with open('/var/result.json', 'w', encoding='utf-8') as f:
+        with open('/var/output/result.json', 'w', encoding='utf-8') as f:
             json.dump(result, f, ensure_ascii=False, indent=4)
 
 
