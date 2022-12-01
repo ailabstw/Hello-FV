@@ -8,6 +8,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
 from sklearn import metrics
+import numpy
 import logging
 import importlib
 from fl_enum import PackageLogMsg,LogLevel
@@ -39,206 +40,6 @@ class Net(nn.Module):
         x = self.fc2(x)
         output = F.log_softmax(x, dim=1)
         return output
-
-
-def test(model, device, test_loader):
-    model.eval()
-    test_loss = 0
-    correct = 0
-    y_pred = []
-    y_true = []
-
-    with torch.no_grad():
-        for data, target in test_loader:
-            data, target = data.to(device), target.to(device)
-            output = model(data)
-
-            test_loss += F.nll_loss(output, target, reduction='sum').item()  # sum up batch loss
-            pred = output.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
-            correct += pred.eq(target.view_as(pred)).sum().item()
-
-            output = (torch.max(torch.exp(output), 1)[1]).data.cpu().numpy()
-            y_pred.extend(output) # Save Prediction
-
-            labels = labels.data.cpu().numpy()
-            y_true.extend(labels) # Save Truth
-
-            confu = [[0,0],[0,0]]
-
-            cf_matrix = metrics.multilabel_confusion_matrix(y_true, y_pred)
-            for matrix in cf_matrix:
-                confu[0][0] = confu[0][0] + matrix[0][0]  # TN = True Negative
-                confu[0][1] = confu[0][1] + matrix[0][1]  # FP = False Positive
-                confu[1][0] = confu[1][0] + matrix[1][0]  # FN = False Negative
-                confu[1][1] = confu[1][1] + matrix[1][1]  # TP = True Positive
-
-            precision = confu[1][1] / (confu[0][1]+confu[1][1])
-            recall = confu[1][1] / (confu[1][1] + confu[1][0])
-            fi_score = 2 * ( precision * recall ) / ( precision + recall )
-
-
-            result = {
-                "dataNum":len(test_loader.dataset),
-                "classification":{
-                    "statistics": {
-                        "mean": {
-                            "table":{
-                                "cols": ["f1","precision","recall"],
-                                "rows": [fi_score,precision,recall]
-                            }
-                        }
-                    },
-                    "classNames": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-                    "0":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":[],
-                                "y-values":[],
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [[0.68, 0.87, 0.79]]
-                        }
-                    },
-                    "1":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":[],
-                                "y-values":[],
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [[0.68, 0.87, 0.79]]
-                        }
-                    },
-                    "2":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":[],
-                                "y-values":[],
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [[0.68, 0.87, 0.79]]
-                        }
-                    },
-                    "3":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":[],
-                                "y-values":[],
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [[0.68, 0.87, 0.79]]
-                        }
-                    },
-                    "4":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":[],
-                                "y-values":[],
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [[0.68, 0.87, 0.79]]
-                        }
-                    },
-                    "5":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":[],
-                                "y-values":[],
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [[0.68, 0.87, 0.79]]
-                        }
-                    },
-                    "6":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":[],
-                                "y-values":[],
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [[0.68, 0.87, 0.79]]
-                        }
-                    },
-                    "7":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":[],
-                                "y-values":[],
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [[0.68, 0.87, 0.79]]
-                        }
-                    },
-                    "8":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":[],
-                                "y-values":[],
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [[0.68, 0.87, 0.79]]
-                        }
-                    },
-                    "9":{
-                        "draw":{
-                            "roc":{
-                                "x-label" : "fpr",
-                                "y-label": "tpr",
-                                "x-values":[],
-                                "y-values":[],
-                            }
-                        },
-                        "table": {
-                            "cols": ["f1", "precision", "recall"],
-                            "rows": [[0.68, 0.87, 0.79]]
-                        }
-                    },
-                }
-            }
-
-
-    test_loss /= len(test_loader.dataset)
-
-    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
-        test_loss, correct, len(test_loader.dataset),
-        100. * correct / len(test_loader.dataset)))
-
 
 
 if __name__ == "__main__":
@@ -377,8 +178,8 @@ if __name__ == "__main__":
         tpr_list = []
         for i in range(10):
             fpr, tpr, thresholds = metrics.roc_curve(y_pred, y_probobility, pos_label=i)
-            fpr_list.append(fpr)
-            tpr_list.append(tpr)
+            fpr_list.append(numpy.nan_to_num(fpr))
+            tpr_list.append(numpy.nan_to_num(tpr))
 
         progress = {
             "status": "completed",
@@ -394,7 +195,7 @@ if __name__ == "__main__":
                     "mean": {
                         "table":{
                             "cols": ["f1","precision","recall"],
-                            "rows": [general_f1_score,general_precision,general_recall]
+                            "rows": [[general_f1_score,general_precision,general_recall]]
                         }
                     }
                 },
@@ -410,7 +211,7 @@ if __name__ == "__main__":
                     },
                     "table": {
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [f1_score_list[0], precision_list[0], recall_list[0]]
+                        "rows": [[f1_score_list[0], precision_list[0], recall_list[0]]]
                     }
                 },
                 "1":{
@@ -424,7 +225,7 @@ if __name__ == "__main__":
                     },
                     "table": {
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [f1_score_list[1], precision_list[1], recall_list[1]]
+                        "rows": [[f1_score_list[1], precision_list[1], recall_list[1]]]
                     }
                 },
                 "2":{
@@ -438,7 +239,7 @@ if __name__ == "__main__":
                     },
                     "table": {
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [f1_score_list[2], precision_list[2], recall_list[2]]
+                        "rows": [[f1_score_list[2], precision_list[2], recall_list[2]]]
                     }
                 },
                 "3":{
@@ -452,7 +253,7 @@ if __name__ == "__main__":
                     },
                     "table": {
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [f1_score_list[3], precision_list[3], recall_list[3]]
+                        "rows": [[f1_score_list[3], precision_list[3], recall_list[3]]]
                     }
                 },
                 "4":{
@@ -466,7 +267,7 @@ if __name__ == "__main__":
                     },
                     "table": {
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [f1_score_list[4], precision_list[4], recall_list[4]]
+                        "rows": [[f1_score_list[4], precision_list[4], recall_list[4]]]
                     }
                 },
                 "5":{
@@ -480,7 +281,7 @@ if __name__ == "__main__":
                     },
                     "table": {
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [f1_score_list[5], precision_list[5], recall_list[5]]
+                        "rows": [[f1_score_list[5], precision_list[5], recall_list[5]]]
                     }
                 },
                 "6":{
@@ -494,7 +295,7 @@ if __name__ == "__main__":
                     },
                     "table": {
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [f1_score_list[6], precision_list[6], recall_list[6]]
+                        "rows": [[f1_score_list[6], precision_list[6], recall_list[6]]]
                     }
                 },
                 "7":{
@@ -508,7 +309,7 @@ if __name__ == "__main__":
                     },
                     "table": {
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [f1_score_list[7], precision_list[7], recall_list[7]]
+                        "rows": [[f1_score_list[7], precision_list[7], recall_list[7]]]
                     }
                 },
                 "8":{
@@ -522,7 +323,7 @@ if __name__ == "__main__":
                     },
                     "table": {
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [f1_score_list[8], precision_list[8], recall_list[8]]
+                        "rows": [[f1_score_list[8], precision_list[8], recall_list[8]]]
                     }
                 },
                 "9":{
@@ -536,7 +337,7 @@ if __name__ == "__main__":
                     },
                     "table": {
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [f1_score_list[9], precision_list[9], recall_list[9]]
+                        "rows": [[f1_score_list[9], precision_list[9], recall_list[9]]]
                     }
                 },
             }
