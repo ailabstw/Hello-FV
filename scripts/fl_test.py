@@ -160,9 +160,9 @@ if __name__ == "__main__":
             recall = matrix[1][1] / (matrix[1][1] + matrix[1][0])
             f1_score = 2 * ( precision * recall ) / ( precision + recall )
 
-            precision_list.append(precision)
-            recall_list.append(recall)
-            f1_score_list.append(f1_score)
+            precision_list.append(numpy.nan_to_num(precision))
+            recall_list.append(numpy.nan_to_num(recall))
+            f1_score_list.append(numpy.nan_to_num(f1_score))
 
             general_confusion_matrix[0][0] = general_confusion_matrix[0][0] + matrix[0][0]  # TN = True Negative
             general_confusion_matrix[0][1] = general_confusion_matrix[0][1] + matrix[0][1]  # FP = False Positive
