@@ -169,9 +169,9 @@ if __name__ == "__main__":
             general_confusion_matrix[1][0] = general_confusion_matrix[1][0] + matrix[1][0]  # FN = False Negative
             general_confusion_matrix[1][1] = general_confusion_matrix[1][1] + matrix[1][1]  # TP = True Positive
 
-        general_precision = general_confusion_matrix[1][1] / (general_confusion_matrix[0][1]+general_confusion_matrix[1][1])
-        general_recall = general_confusion_matrix[1][1] / (general_confusion_matrix[1][1] + general_confusion_matrix[1][0])
-        general_f1_score = 2 * ( precision * recall ) / ( precision + recall )
+        general_precision = numpy.nan_to_num((general_confusion_matrix[1][1] / (general_confusion_matrix[0][1]+general_confusion_matrix[1][1])))
+        general_recall = numpy.nan_to_num(general_confusion_matrix[1][1] / (general_confusion_matrix[1][1] + general_confusion_matrix[1][0]))
+        general_f1_score = numpy.nan_to_num(2 * ( precision * recall ) / ( precision + recall ))
 
 
         fpr_list = []
