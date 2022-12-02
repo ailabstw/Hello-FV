@@ -99,7 +99,7 @@ if __name__ == "__main__":
     dataset = None
     transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
     try:
-        dataset = datasets.MNIST('/data', train=False, download=True, transform=transform)
+        dataset = datasets.MNIST('/data', train=False, download=False, transform=transform)
     except Exception as err:
         with open('/var/logs/error.log', 'a') as fd:
             fd.write(f"load dataset failed: " + str(err))
