@@ -344,7 +344,7 @@ if __name__ == "__main__":
                 "confusionMatrix": {
                     "x-labels": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
                     "y-labels": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-                    "values": g_matrix
+                    "values": g_matrix.tolist()
                 }
             }
         }
