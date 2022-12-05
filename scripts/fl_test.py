@@ -155,6 +155,7 @@ if __name__ == "__main__":
         f1_score_list = []
 
         cf_matrix = metrics.multilabel_confusion_matrix(y_true, y_pred)
+        g_matrix = metrics.confusion_matrix(y_true, y_pred)
         for matrix in cf_matrix:
             precision = matrix[1][1] / (matrix[0][1]+matrix[1][1])
             recall = matrix[1][1] / (matrix[1][1] + matrix[1][0])
@@ -340,6 +341,11 @@ if __name__ == "__main__":
                         "rows": [[f1_score_list[9], precision_list[9], recall_list[9]]]
                     }
                 },
+                "confusionMatrix": {
+                    "x-labels": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+                    "y-labels": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+                    "values": g_matrix
+                }
             }
         }
 
