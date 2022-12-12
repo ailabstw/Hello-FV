@@ -198,57 +198,57 @@ if __name__ == "__main__":
                     {
                         "title": "average evaluation metrics",
                         "labels":["f1","precision","recall"],
-                        "values": [[str(general_f1_score),str(general_precision),str(general_recall)]]
+                        "values": [str(general_f1_score),str(general_precision),str(general_recall)]
                     },
                     {
                         "title": "Number 0 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "values": [[str(f1_score_list[0]),str(precision_list[0]),str(recall_list[0])]]
+                        "values": [str(f1_score_list[0]),str(precision_list[0]),str(recall_list[0])]
                     },
                     {
                         "title": "Number 1 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "values": [[str(f1_score_list[1]),str(precision_list[1]),str(recall_list[1])]]
+                        "values": [str(f1_score_list[1]),str(precision_list[1]),str(recall_list[1])]
                     },
                     {
                         "title": "Number 2 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "values": [[str(f1_score_list[2]),str(precision_list[2]),str(recall_list[2])]]
+                        "values": [str(f1_score_list[2]),str(precision_list[2]),str(recall_list[2])]
                     },
                     {
                         "title": "Number 3 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "values": [[str(f1_score_list[3]),str(precision_list[3]),str(recall_list[3])]]
+                        "values": [str(f1_score_list[3]),str(precision_list[3]),str(recall_list[3])]
                     },
                     {
                         "title": "Number 4 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "values": [[str(f1_score_list[4]),str(precision_list[4]),str(recall_list[4])]]
+                        "values": [str(f1_score_list[4]),str(precision_list[4]),str(recall_list[4])]
                     },
                     {
                         "title": "Number 5 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "values": [[str(f1_score_list[5]),str(precision_list[5]),str(recall_list[5])]]
+                        "values": [str(f1_score_list[5]),str(precision_list[5]),str(recall_list[5])]
                     },
                     {
                         "title": "Number 6 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "values": [[str(f1_score_list[6]),str(precision_list[6]),str(recall_list[6])]]
+                        "values": [str(f1_score_list[6]),str(precision_list[6]),str(recall_list[6])]
                     },
                     {
                         "title": "Number 7 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "values": [[str(f1_score_list[7]),str(precision_list[7]),str(recall_list[7])]]
+                        "values": [str(f1_score_list[7]),str(precision_list[7]),str(recall_list[7])]
                     },
                     {
                         "title": "Number 8 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "values": [[str(f1_score_list[8]),str(precision_list[8]),str(recall_list[8])]]
+                        "values": [str(f1_score_list[8]),str(precision_list[8]),str(recall_list[8])]
                     },
                     {
                         "title": "Number 9 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "values": [[str(f1_score_list[9]),str(precision_list[9]),str(recall_list[9])]]
+                        "values": [str(f1_score_list[9]),str(precision_list[9]),str(recall_list[9])]
                     },
                 ],
                 "heatmaps":[
