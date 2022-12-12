@@ -8,13 +8,15 @@ fit their AI model in this framework.
 ## Getting started
 
 Prepare a Linux enviroment（Ubuntu is prefered） with docker installed.
-And simply download the MNIST datasets from Pytorch 's official site and put the dataset it in /data, and the model weight given as below link.
+And simply download the MNIST datasets from Pytorch 's official site （or py the link as below）and unzip this dataset to be a folder named MNIST and put this folder it in /data .
 
-[model_weight]()
+[mnist_dataset.zip]()
 
-put this model weight in /var/model_weight.ckpt
+After dataset have been prepared , download the model weight given as below link.
 
-and lauch the container we have do it for you as below.
+[model_weight.ckpt]()
+
+Put the MNIST model weight in /var/model_weight.ckpt and lauch the container we have made for you as the command below.
 
 ```bash
 docker run -it --name hello-fv --runtime=nvidia \
