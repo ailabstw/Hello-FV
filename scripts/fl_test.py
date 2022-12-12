@@ -155,7 +155,7 @@ if __name__ == "__main__":
         f1_score_list = []
 
         cf_matrix = metrics.multilabel_confusion_matrix(y_true, y_pred)
-        g_matrix = metrics.confusion_matrix(y_true, y_pred)
+        g_matrix = numpy.nan_to_num(metrics.confusion_matrix(y_true, y_pred))
         for matrix in cf_matrix:
             precision = matrix[1][1] / (matrix[0][1]+matrix[1][1])
             recall = matrix[1][1] / (matrix[1][1] + matrix[1][0])
@@ -190,164 +190,160 @@ if __name__ == "__main__":
             json.dump(progress, f, ensure_ascii=False, indent=4)
 
         result = {
-            "dataNum":len(test_loader.dataset)*10,
-            "classification":{
-                "statistics": {
-                    "mean": {
-                        "table":{
-                            "cols": ["f1","precision","recall"],
-                            "rows": [[general_f1_score,general_precision,general_recall]]
-                        }
-                    }
-                },
-                "classNames": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-                "0":{
-                    "draw":{
-                        "roc":{
-                            "x-label" : "fpr",
-                            "y-label": "tpr",
-                            "x-values":fpr_list[0].tolist(),
-                            "y-values":tpr_list[0].tolist(),
-                        }
+            "metadata": {
+                "datasetSize": len(test_loader.dataset)*10,
+            },
+            "results": {
+                "tables": [
+                    {
+                        "title": "average evaluation metrics",
+                        "labels":["f1","precision","recall"],
+                        "values": [[str(general_f1_score),str(general_precision),str(general_recall)]]
                     },
-                    "table": {
+                    {
+                        "title": "Number 0 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [[f1_score_list[0], precision_list[0], recall_list[0]]]
-                    }
-                },
-                "1":{
-                    "draw":{
-                        "roc":{
-                            "x-label" : "fpr",
-                            "y-label": "tpr",
-                            "x-values":fpr_list[1].tolist(),
-                            "y-values":tpr_list[1].tolist(),
-                        }
+                        "values": [[str(f1_score_list[0]),str(precision_list[0]),str(recall_list[0])]]
                     },
-                    "table": {
+                    {
+                        "title": "Number 1 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [[f1_score_list[1], precision_list[1], recall_list[1]]]
-                    }
-                },
-                "2":{
-                    "draw":{
-                        "roc":{
-                            "x-label" : "fpr",
-                            "y-label": "tpr",
-                            "x-values":fpr_list[2].tolist(),
-                            "y-values":tpr_list[2].tolist(),
-                        }
+                        "values": [[str(f1_score_list[1]),str(precision_list[1]),str(recall_list[1])]]
                     },
-                    "table": {
+                    {
+                        "title": "Number 2 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [[f1_score_list[2], precision_list[2], recall_list[2]]]
-                    }
-                },
-                "3":{
-                    "draw":{
-                        "roc":{
-                            "x-label" : "fpr",
-                            "y-label": "tpr",
-                            "x-values":fpr_list[3].tolist(),
-                            "y-values":tpr_list[3].tolist(),
-                        }
+                        "values": [[str(f1_score_list[2]),str(precision_list[2]),str(recall_list[2])]]
                     },
-                    "table": {
+                    {
+                        "title": "Number 3 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [[f1_score_list[3], precision_list[3], recall_list[3]]]
-                    }
-                },
-                "4":{
-                    "draw":{
-                        "roc":{
-                            "x-label" : "fpr",
-                            "y-label": "tpr",
-                            "x-values":fpr_list[4].tolist(),
-                            "y-values":tpr_list[4].tolist(),
-                        }
+                        "values": [[str(f1_score_list[3]),str(precision_list[3]),str(recall_list[3])]]
                     },
-                    "table": {
+                    {
+                        "title": "Number 4 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [[f1_score_list[4], precision_list[4], recall_list[4]]]
-                    }
-                },
-                "5":{
-                    "draw":{
-                        "roc":{
-                            "x-label" : "fpr",
-                            "y-label": "tpr",
-                            "x-values":fpr_list[5].tolist(),
-                            "y-values":tpr_list[5].tolist(),
-                        }
+                        "values": [[str(f1_score_list[4]),str(precision_list[4]),str(recall_list[4])]]
                     },
-                    "table": {
+                    {
+                        "title": "Number 5 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [[f1_score_list[5], precision_list[5], recall_list[5]]]
-                    }
-                },
-                "6":{
-                    "draw":{
-                        "roc":{
-                            "x-label" : "fpr",
-                            "y-label": "tpr",
-                            "x-values":fpr_list[6].tolist(),
-                            "y-values":tpr_list[6].tolist(),
-                        }
+                        "values": [[str(f1_score_list[5]),str(precision_list[5]),str(recall_list[5])]]
                     },
-                    "table": {
+                    {
+                        "title": "Number 6 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [[f1_score_list[6], precision_list[6], recall_list[6]]]
-                    }
-                },
-                "7":{
-                    "draw":{
-                        "roc":{
-                            "x-label" : "fpr",
-                            "y-label": "tpr",
-                            "x-values":fpr_list[7].tolist(),
-                            "y-values":tpr_list[7].tolist(),
-                        }
+                        "values": [[str(f1_score_list[6]),str(precision_list[6]),str(recall_list[6])]]
                     },
-                    "table": {
+                    {
+                        "title": "Number 7 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [[f1_score_list[7], precision_list[7], recall_list[7]]]
-                    }
-                },
-                "8":{
-                    "draw":{
-                        "roc":{
-                            "x-label" : "fpr",
-                            "y-label": "tpr",
-                            "x-values":fpr_list[8].tolist(),
-                            "y-values":tpr_list[8].tolist(),
-                        }
+                        "values": [[str(f1_score_list[7]),str(precision_list[7]),str(recall_list[7])]]
                     },
-                    "table": {
+                    {
+                        "title": "Number 8 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [[f1_score_list[8], precision_list[8], recall_list[8]]]
-                    }
-                },
-                "9":{
-                    "draw":{
-                        "roc":{
-                            "x-label" : "fpr",
-                            "y-label": "tpr",
-                            "x-values":fpr_list[9].tolist(),
-                            "y-values":tpr_list[9].tolist(),
-                        }
+                        "values": [[str(f1_score_list[8]),str(precision_list[8]),str(recall_list[8])]]
                     },
-                    "table": {
+                    {
+                        "title": "Number 9 evaluation metrics",
                         "cols": ["f1", "precision", "recall"],
-                        "rows": [[f1_score_list[9], precision_list[9], recall_list[9]]]
-                    }
-                },
-                "confusionMatrix": [{
-                    ""
-                    "x-labels": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-                    "y-labels": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-                    "values": g_matrix.tolist()
-                }]
-            }
+                        "values": [[str(f1_score_list[9]),str(precision_list[9]),str(recall_list[9])]]
+                    },
+                ],
+                "heatmaps":[
+                    {
+                        "title": "10 numbers 's ConfusionMatrix",
+                        "x-labels":["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+                        "y-labels":["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+                        "x-axis":"numbers",
+                        "y-axis":"numbers",
+                        "values":g_matrix.tolist(),
+                    },
+                ],
+                "plots": [
+                    {
+                        "title": "Number 0 's roc curve",
+                        "labels":["Number 0"],
+                        "x-axis":"fpr",
+                        "y-axis":"tpr",
+                        "x-values":[[fpr_list[0].tolist()]],
+                        "y-values":[[tpr_list[0].tolist()]],
+                    },
+                    {
+                        "title": "Number 1 's roc curve",
+                        "labels":["Number 1"],
+                        "x-axis":"fpr",
+                        "y-axis":"tpr",
+                        "x-values":[[fpr_list[1].tolist()]],
+                        "y-values":[[tpr_list[1].tolist()]],
+                    },
+                    {
+                        "title": "Number 2 's roc curve",
+                        "labels":["Number 2"],
+                        "x-axis":"fpr",
+                        "y-axis":"tpr",
+                        "x-values":[[fpr_list[2].tolist()]],
+                        "y-values":[[tpr_list[2].tolist()]],
+                    },
+                    {
+                        "title": "Number 3 's roc curve",
+                        "labels":["Number 3"],
+                        "x-axis":"fpr",
+                        "y-axis":"tpr",
+                        "x-values":[[fpr_list[3].tolist()]],
+                        "y-values":[[tpr_list[3].tolist()]],
+                    },
+                    {
+                        "title": "Number 4 's roc curve",
+                        "labels":["Number 4"],
+                        "x-axis":"fpr",
+                        "y-axis":"tpr",
+                        "x-values":[[fpr_list[4].tolist()]],
+                        "y-values":[[tpr_list[4].tolist()]],
+                    },
+                    {
+                        "title": "Number 5 's roc curve",
+                        "labels":["Number 5"],
+                        "x-axis":"fpr",
+                        "y-axis":"tpr",
+                        "x-values":[[fpr_list[5].tolist()]],
+                        "y-values":[[tpr_list[5].tolist()]],
+                    },
+                    {
+                        "title": "Number 6 's roc curve",
+                        "labels":["Number 6"],
+                        "x-axis":"fpr",
+                        "y-axis":"tpr",
+                        "x-values":[[fpr_list[6].tolist()]],
+                        "y-values":[[tpr_list[6].tolist()]],
+                    },
+                    {
+                        "title": "Number 7 's roc curve",
+                        "labels":["Number 7"],
+                        "x-axis":"fpr",
+                        "y-axis":"tpr",
+                        "x-values":[[fpr_list[7].tolist()]],
+                        "y-values":[[tpr_list[7].tolist()]],
+                    },
+                    {
+                        "title": "Number 8 's roc curve",
+                        "labels":["Number 8"],
+                        "x-axis":"fpr",
+                        "y-axis":"tpr",
+                        "x-values":[[fpr_list[8].tolist()]],
+                        "y-values":[[tpr_list[8].tolist()]],
+                    },
+                    {
+                        "title": "Number 9 's roc curve",
+                        "labels":["Number 9"],
+                        "x-axis":"fpr",
+                        "y-axis":"tpr",
+                        "x-values":[[fpr_list[9].tolist()]],
+                        "y-values":[[tpr_list[9].tolist()]],
+                    },
+                ],
+            },
         }
 
         with open('/var/output/result.json', 'w', encoding='utf-8') as f:
