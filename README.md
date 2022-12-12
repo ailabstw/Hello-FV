@@ -7,9 +7,14 @@ fit their AI model in this framework.
 
 ## Getting started
 
-Just simply download the MNIST datasets from Pytorch 's official site and put it in /
+Prepare a Linux enviroment（Ubuntu is prefered） with docker installed.
+And simply download the MNIST datasets from Pytorch 's official site and put the dataset it in /data, and the model weight given as below link.
 
-and lauch the container we have do it for you.
+[model_weight]()
+
+put this model weight in /var/model_weight.ckpt
+
+and lauch the container we have do it for you as below.
 
 ```bash
 docker run -it --name hello-fv --runtime=nvidia \
@@ -21,7 +26,7 @@ docker run -it --name hello-fv --runtime=nvidia \
 -v /var:/var \
 -v /var/output:/var/output \
 -v /var/logs:/var/logs \
-registry.corp.ailabs.tw/federated-learning/hello-fv/edge:master
+registry.corp.ailabs.tw/federated-learning/hello-fv/edge:1.1.0
 ```
 
 There is some docker setting have to be set before you lauch this container. We introduce them here.
