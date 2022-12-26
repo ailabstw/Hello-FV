@@ -19,20 +19,20 @@ Here we can see what will be done while we are doing a federated validation with
 
 When a FV plan starts, the edge dashboard will automatically launch the container and start doing validation.
 
-As we can see in diagram, there are 4 phases that will go through in a FV plan.
+As we can see in the diagram, there are 4 phases that will go through in a FV plan,
 `initialization`,`preprocessing`,`validating` and `completed`.
 
-At each phase, the container should output the corresponding *progress.json* to tell the progress of FV。 
+At each phase, the container should output the corresponding **progress.json** to tell outside the progress of FV。 
 
-Ailabs 預期開發者會在`initialization`這個階段進行所有聯合驗證前的初始化動作，例如載入模型與權重、載入資料集等。
-而下一個階段`preprocessing`則是被預期會進行例如資料集的前處理與再加載或其他須預先處理的事項(若前處理需求可跳過此階段)，接下來的階段即為`validating`，即為驗證正在進行中，完成後進入`completed`階段。
+Ailabs 預期開發者會在`initialization`這個階段進行所有聯合驗證前的初始化動作，例如載入模型與模型權重、載入資料集等。
+下一個階段`preprocessing`被預期會進行如資料集的預先處理與再加載或其他預先處理的事項(若前處理需求可跳過此階段)，接下來的階段即`validating`，代表已進入驗證並進行中，驗證完成後進入`completed`階段。
 
-以上四個階段(可略過`preprocessing`若開發者沒有前處理需求)，皆須輸出一個progess.json的檔案，以便Ailabs FV framework追蹤開發者的FV container的狀態。
+以上四個階段(除了`preprocessing`若無需求可略過)，每個階段都須要輸出一個**rogess.json**的檔案(已有則覆蓋)，以便Ailabs FV framework追蹤開發者的FV container的狀態，我們後面會在詳解**progess.json**。
 
 
 # The datasets importing for FV
 
-我們在進行聯合驗證前，開發者所製作的docker image需要進行資料集的輸入，而資料集的位置會放在開發者的PI其創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)時所指定的位置，如下。
+我們在進行聯合驗證前，開發者所製作的docker image需要進行資料集的輸入，而資料集的位置會在開發者的PI其創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)時所輸入的位置，如下。
 
 <div align="left"><img src="./assets/fv_import_datasets.png" style="width:100%"></img></div>
 
@@ -43,7 +43,7 @@ Ailabs 預期開發者會在`initialization`這個階段進行所有聯合驗證
 
 The  *progress.json*  has content as below. 
 
-* 當進行initialization階段的時候，progress.json須輸出如下內容，進度改變即進行更新一次。
+* 當initialization階段的時候，progress.json須輸出如下內容，進度改變即進行更新一次。
   ```bash
     {
       "status": "initialization",
@@ -51,21 +51,21 @@ The  *progress.json*  has content as below.
     }
   ```
 
-* 當進行preprocessing階段的時候，progress.json須輸出如下內容，進度改變即進行更新一次。
+* 當preprocessing階段的時候，progress.json須輸出如下內容，進度改變即進行更新一次。
   ```bash
     {
       "status": "preprocessing",
       "completedPercentage": 20
     }
   ```
-* 當進行preprocessing階段的時候，progress.json須輸出如下內容，進度改變即進行更新一次。
+* 當validating階段的時候，progress.json須輸出如下內容，進度改變即進行更新一次。
   ```bash
     {
       "status": "validating",
       "completedPercentage": 20
     }
   ```
-* 當進行preprocessing階段的時候，progress.json須輸出如下內容，進度改變即進行更新一次。
+* 當completed階段的時候，progress.json須輸出如下內容，進度改變即進行更新一次。
   ```bash
     {
       "status": "completed",
@@ -73,17 +73,17 @@ The  *progress.json*  has content as below.
     }
   ```
 
-  這個*progress.json*須放在當開發者的PI創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)時指定的output路徑（請注意：後面將提到的result.json，也是放在這個路徑下）。即
+  這個*progress.json*開發者在每個階段輸出一個(若存在就覆蓋)並放在開發者的PI創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)時指定的output路徑（後面將提到的result.json，也是放在這個路徑下），如下。
 
 <div align="left"><img src="./assets/fv_output_path.png" style="width:100%"></img></div>
 
 
 ## The output file format of FV (federated validation) result.json
 
-`result.json` 內容為一個json obejct，此object包含2個json object，分別是metadata和
-results，其中metadata為FV的基本資訊，而results為FV的驗證結果圖表。
+`result.json` 內容為一個json obejct，此object包含了2個json object，分別是metadata和
+results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖表。
 
-metadata目前僅有一項基本資訊即datasetSize，即驗證用的資料集的大小。
+* metadata目前僅一項基本資訊即datasetSize，代表驗證用的資料集其大小。
 
 而results則可以附帶多種以下圖表
 * tables：一維表格
@@ -172,8 +172,8 @@ metadata目前僅有一項基本資訊即datasetSize，即驗證用的資料集�
 
 ## result.json 與 cloud 生成圖的對應
 
-* tables：為單個row的表格array，每個edge可以呈現多單個row表格，而cloud會將不同edge之間的單個row表格(依照表格title和label的合成為多個row的tables)，例如，若有2個edges，分別如下上傳其json如下
-  * FV-dev.edge.1 上傳json中的tables部分如下
+* tables：為單個row的表格array，每個edge可以呈現多單個row表格，例如，若有2個edges，分別如下上傳其json包含tables如下
+  * FV-dev.edge.1
     ```json
       {
           results:{
@@ -192,7 +192,7 @@ metadata目前僅有一項基本資訊即datasetSize，即驗證用的資料集�
           }
       }
     ```
-  * FV-dev.edge.2 上傳json中的tables部分如下
+  * FV-dev.edge.2
     ```json
       {
           results:{
@@ -211,14 +211,12 @@ metadata目前僅有一項基本資訊即datasetSize，即驗證用的資料集�
           }
       }
     ```
-
+以上FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的tables將會在cloud報表顯示如下圖型。
 <div align="left"><img src="./assets/fv_tables.png" style="width:100%"></img></div>
 
-FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的tables將會在cloud報表顯示如上圖型。
 
-
-* bars： 同table為單row表格array，差異點在多了一個衡量value的單位，且圖形的呈現為長條圖，例如，若有2個edges，分別如下上傳其json如下
-  * FV-dev.edge.1 上傳json中的bars部分如下
+* bars： 同table為單row表格array，差異點在多了一個衡量value的單位，且圖形的呈現為長條圖，例如，若有2個edges，分別如下上傳其json中的bars如下
+  * FV-dev.edge.1
     ```json
     {
         results:{
@@ -240,7 +238,7 @@ FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的tables將會在c
       }
     ```
 
-  * FV-dev.edge.2 上傳json中的bars部分如下
+  * FV-dev.edge.2
     ```json
     {
         results:{
@@ -262,12 +260,12 @@ FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的tables將會在c
       }
     ```
 
+以上FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的bars將會在cloud報表顯示如下圖型。
 <div align="left"><img src="./assets/fv_bars.png" style="width:100%"></img></div>
-FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的bars將會在cloud報表顯示如上圖型。
 
 
-* heatmaps：為N*N的陣列的array，N*N陣列中的每格為一個json number，例如，若有2個edges，分別如下上傳其json如下
-  * FV-dev.edge.1 上傳json中的heatmaps部分如下
+* heatmaps：為N*N的陣列的array，N*N陣列中的每格為一個json number，例如，若有2個edges，分別如下上傳其json中的heatmaps如下
+  * FV-dev.edge.1
     ```json
     {
         results:{
@@ -285,7 +283,7 @@ FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的bars將會在clo
       }
     ```
 
-  * FV-dev.edge.2 上傳json中的heatmaps部分如下
+  * FV-dev.edge.2
     ```json
     {
         results:{
@@ -303,11 +301,11 @@ FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的bars將會在clo
       }
     ```
 
+以上FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的heatmaps將會在cloud報表顯示如下圖型。
 <div align="left"><img src="./assets/fv_heatmaps.png" style="width:100%"></img></div>
-FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的heatmaps將會在cloud報表顯示如上圖型。
 
-* plots: 多個折線圖的array，每個折線圖有多條折線，每個折線有一組x-axis的values和一組y-axis的values，每個折線的某個x-axis value會對應到同index的y-axis的value，labels則為每個折線圖的名稱
-  * FV-dev.edge.1 上傳json中的plots部分如下
+* plots: 多個折線圖的array，每個折線圖有多條折線，每個折線有一組x-axis的values和一組y-axis的values，每個折線的某個x-axis value會對應到同index的y-axis的value，labels則為每個折線圖的名稱，例如，若有2個edges，分別如下上傳其json中的plots如下
+  * FV-dev.edge.1
     ```json
       {
         results:{
@@ -325,7 +323,7 @@ FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的heatmaps將會�
       }
     ```
 
-  * FV-dev.edge.2 上傳json中的plots部分如下
+  * FV-dev.edge.2
     ```json
       {
         results:{
@@ -343,11 +341,11 @@ FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的heatmaps將會�
       }
     ```
 
-<div align="left"><img src="./assets/fv_heatmaps.png" style="width:100%"></img></div>
-FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的plots將會在cloud報表顯示如上圖型。
+以上FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的plots將會在cloud報表顯示如下圖型。
+<div align="left"><img src="./assets/fv_plots.png" style="width:100%"></img></div>
 
-* images: 若上面的圖型格式無法滿足呈現FV的數據結果，則可自行生成圖片，並由cloud來顯示，此時請開發者將影像放在output folder並將資訊如以下填入result.json。
-  * FV-dev.edge.1 上傳json中的images部分如下
+* images: 若上面的圖型格式無法滿足呈現FV的數據結果，則可自行生成圖片，並由cloud來顯示，此時請開發者將影像放在output folder並將資訊如以下填入result.json。例如，若有2個edges，分別如下上傳其json中的images如下
+  * FV-dev.edge.1
 
     ```json
     {
@@ -362,7 +360,7 @@ FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的plots將會在cl
     }
     ```
 
-  * FV-dev.edge.2 上傳json中的images部分如下
+  * FV-dev.edge.2
     ```json
       {
         results:{
@@ -376,8 +374,8 @@ FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的plots將會在cl
       }
     ```
 
-<div align="left"><img src="./assets/fv_heatmaps.png" style="width:100%"></img></div>
-FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的images將會在cloud報表顯示如上圖型。
+以上FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的images將會在cloud報表顯示如下圖型。
+<div align="left"><img src="./assets/fv_images.png" style="width:100%"></img></div>
 
 
 # What is Hello FV
