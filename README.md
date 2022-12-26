@@ -1,9 +1,9 @@
 # Ailabs FV (federated validation) framework
 
-Ailabs FV framework 是由Ailabs所開發出的一套聯合驗證的框架，開發者製作一個符合框架規範的docker image，即可
-將其docker image使用在Ailabs FV的專案之中。
+Ailabs FV framework 是由Ailabs開發出的一套聯合驗證的框架，開發者須製作一個符合框架規範的docker image，即可
+將此docker image使用在Ailabs FV的專案之中。
 
-* 開發者docker image經由滿足下述條件:
+* 開發者的docker image須滿足下述條件:
   * 完成驗證用的資料集的輸入 (The datasets importing for FV)
   * 完成在FV過程之中的進度(progress.json)輸出 (Output progress.json while the FV is in progress)
   * 完成驗證結果(result.json)的輸出 (Output result.json after the FV is done)
@@ -12,7 +12,7 @@ Ailabs FV framework 是由Ailabs所開發出的一套聯合驗證的框架，開
 
 ## The FV (federated validation) diagram
 
-Here we can see what will be done while we are doing a federated validation with our Ailabs's FV framework.
+Here we can see what will be done while we are doing a federated validation with the Ailabs FV framework.
 
 <div align="left"><img src="./assets/fv_msc_1.png" style="width:100%"></img></div>
 
@@ -23,26 +23,26 @@ As we can see in the diagram, there are 4 phases that will go through in a FV pl
 
 At each phase, the container should output the corresponding **progress.json** to tell outside the progress of FV。 
 
-Ailabs 預期開發者會在`initialization`這個階段進行所有聯合驗證前的初始化動作，例如載入模型與模型權重、載入資料集等。
-下一個階段`preprocessing`被預期會進行如資料集的預先處理與再加載或其他預先處理的事項(若前處理需求可跳過此階段)，接下來的階段即`validating`，代表已進入驗證並進行中，驗證完成後進入`completed`階段。
+Ailabs預期開發者會在`initialization`這個階段進行所有聯合驗證前的初始化動作，例如載入模型與模型權重、載入資料集等。
+下一個階段`preprocessing`開發者被預期會進行例如資料集的預先處理與再加載或其他需要預先處理的事項(若無需求可跳過此階段)，接下來的階段即`validating`，代表已進入驗證並正在進行中，驗證完成後進入`completed`即完成階段。
 
-以上四個階段(除了`preprocessing`若無需求可略過)，每個階段都須要輸出一個**progess.json**的檔案(已有則覆蓋)，以便Ailabs FV framework追蹤開發者的FV container的狀態，我們後面會在詳解**progess.json**。
+以上四個階段(除了`preprocessing`無需求可略過)，每個階段都須最少輸出一個**progess.json**的檔案(已存在則覆蓋)，使Ailabs FV framework能追蹤開發者的FV的狀態，後面會再詳細解釋**progess.json**。
 
 
 # The datasets importing for FV
 
-我們在進行聯合驗證前，開發者所製作的docker image需要進行資料集的輸入，而資料集的位置會在開發者的PI其創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)時所輸入的位置，如下。
+進行聯合驗證前，開發者所製作的docker image必定需要進行資料集的輸入，資料集的位置會在開發者的PI其創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)時所輸入，如下。
 
 <div align="left"><img src="./assets/fv_import_datasets.png" style="width:100%"></img></div>
 
-開發者在進行FV操作途中會使用edge dashboard將其資料集(以zip格式)上傳[FV上傳資料集](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch5/5-2-how-to-upload-validating-datasets)，我們的edge dashboard會將開發者上傳的zip解壓縮並放到上述的指定的位置，即可開始聯合驗證下一步。
+開發者在進行FV操作途中會使用edge dashboard將其資料集(以zip格式)上傳[FV上傳資料集](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch5/5-2-how-to-upload-validating-datasets)，我們的edge dashboard會將開發者上傳的zip解壓縮並放到上述的指定的位置，即可開始聯合驗證。
 
 <div align="left"><img src="./assets/fv_upload_datasets.png" style="width:100%"></img></div>
 
 
-## Output progress.json while the FV is in progress
+## Output progress.json while the FV is in progress.
 
-The  *progress.json*  has content as below. 
+The **progress.json**  has content as below. 
 
 * 當initialization階段的時候，progress.json須輸出如下內容，進度改變即進行更新一次。
   ```bash
@@ -74,7 +74,7 @@ The  *progress.json*  has content as below.
     }
   ```
 
-  這個*progress.json*開發者在每個階段輸出一個(若存在就覆蓋)並放在開發者的PI創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)時指定的output路徑（後面將提到的result.json，也是放在這個路徑下），如下。
+  這個**progress.json**開發者在每個階段輸出一個(若存在就覆蓋)並須被放在開發者的PI創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)指定的output路徑（後面將提到的result.json，也是放在這個路徑下），如下。
 
 <div align="left"><img src="./assets/fv_output_path.png" style="width:100%"></img></div>
 
@@ -173,7 +173,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
 
 ## result.json 與 cloud 生成圖的對應
 
-* tables：為單個row的表格array，每個edge可以呈現多單個row表格，例如，若有2個edges，分別如下上傳其json包含tables如下
+* tables：為單列的表格array，每個edge可以呈現多單列表格，例如，若有2個edges，其json包含tables分別如下
   * FV-dev.edge.1
     ```json
       {
@@ -216,7 +216,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
 <div align="left"><img src="./assets/fv_tables.png" style="width:100%"></img></div>
 
 
-* bars： 同table為單row表格array，差異點在多了一個衡量value的單位，且圖形的呈現為長條圖，例如，若有2個edges，分別如下上傳其json中的bars如下
+* bars： 同table為單row表格array，差異點在多了一個衡量value的單位，且圖形的呈現為長條圖，例如，若有2個edges，其json中的bars分別如下
   * FV-dev.edge.1
     ```json
     {
@@ -265,7 +265,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
 <div align="left"><img src="./assets/fv_bars.png" style="width:100%"></img></div>
 
 
-* heatmaps：為N*N的陣列的array，N*N陣列中的每格為一個json number，例如，若有2個edges，分別如下上傳其json中的heatmaps如下
+* heatmaps：為N*N的陣列的array，N*N陣列中的每格為一個json number，例如，若有2個edges，其json中的heatmaps分別如下
   * FV-dev.edge.1
     ```json
     {
@@ -305,7 +305,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
 以上FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的heatmaps將會在cloud報表顯示如下圖型。
 <div align="left"><img src="./assets/fv_heatmaps.png" style="width:100%"></img></div>
 
-* plots: 多個折線圖的array，每個折線圖有多條折線，每個折線有一組x-axis的values和一組y-axis的values，每個折線的某個x-axis value會對應到同index的y-axis的value，labels則為每個折線圖的名稱，例如，若有2個edges，分別如下上傳其json中的plots如下
+* plots: 多個折線圖的array，每個折線圖有多條折線，每個折線有一組x-axis的values和一組y-axis的values，每個折線的某個x-axis value會對應到同index的y-axis的value，labels則為每個折線圖的名稱，例如，若有2個edges，其json中的plots分別如下
   * FV-dev.edge.1
     ```json
       {
@@ -345,7 +345,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
 以上FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的plots將會在cloud報表顯示如下圖型。
 <div align="left"><img src="./assets/fv_plots.png" style="width:100%"></img></div>
 
-* images: 若上面的圖型格式無法滿足呈現FV的數據結果，則可自行生成圖片，並由cloud來顯示，此時請開發者將影像放在output folder並將資訊如以下填入result.json。例如，若有2個edges，分別如下上傳其json中的images如下
+* images: 若上面的圖型格式無法滿足呈現FV的數據結果，則可自行生成圖片，並由cloud來顯示，此時請開發者將影像放在output folder並將資訊如以下填入result.json。例如，若有2個edges，其json中的images分別如下
   * FV-dev.edge.1
 
     ```json
