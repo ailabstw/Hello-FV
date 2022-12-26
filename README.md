@@ -80,6 +80,18 @@ The **progress.json**  has content as below. 其中`status`為階段，`complete
 <div align="left"><img src="./assets/fv_logs_path.png" style="width:100%"></img></div>
 
 
+
+# Output error.log while encountering a fatal error in progress of the FV
+
+當進行FV時，除了每個階段須最少輸出一次progress.json外（轉階段即一次），當嚴重錯誤發生的時候，開發者的container也須能夠捕捉到錯誤並進行error handling，並將原因以如下的json格式輸出在log目錄下，以檔名**error.log**輸出。(跟**progress.json**相同目錄底下)
+
+```json
+  {
+    error: "The reason causing the fatal error or the stack of error"
+  }
+```
+
+
 # Output result.json after the FV is done
 
 `result.json` 內容為一個json obejct，此object包含了2個json object，分別是metadata和
@@ -430,16 +442,6 @@ Hello-FV 主要由python撰寫，讓開發者學習Ailabs's FV framework，Hello
 * **-v /var/logs:/var/logs** : This is the path where the container outputs the logs of the developer's container. The progress of validation(**progress.json**) should also be put in here.
 
 
-
-# Output error.log while encountering a fatal error in progress of the FV
-
-當進行FV時，除了每個階段須最少輸出一次progress.json外（轉階段即一次），當致命錯誤發生的時候，開發者的container也須能夠捕捉到錯誤並進行error handling，並將原因以如下的json格式輸出在log目錄下，以檔名**error.log**輸出。(跟**progress.json**相同目錄底下)
-
-```json
-  {
-    error: "The reason causing the fatal error or the stack of error"
-  }
-```
 
 
 # Hello-FV 的result.json
