@@ -7,6 +7,7 @@ Ailabs FV framework 是由Ailabs開發出的一套聯合驗證的框架，開發
   * 完成驗證用的資料集的輸入 (The datasets importing for FV)
   * 完成在FV過程之中的進度(progress.json)輸出 (Output progress.json while the FV is in progress)
   * 完成驗證結果(result.json)的輸出 (Output result.json after the FV is done)
+  * 在錯誤發生的時候進行error handling，並將error以error.log輸出(Output error.log while encountering a fatal error in progress of the FV)
 
 
 
@@ -74,15 +75,23 @@ The **progress.json**  has content as below. 其中`status`為階段，`complete
     }
   ```
 
-  這個**progress.json**開發者在每個階段輸出一個(若存在就覆蓋)並須被放在開發者的PI創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)指定的output路徑（後面將提到的result.json，也是放在這個路徑下），如下。
+  這個**progress.json**開發者在每個階段最少須輸出一個(即進入新階段一開始)並須被放在開發者的PI創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)指定的logs路徑。如下
 
-<div align="left"><img src="./assets/fv_output_path.png" style="width:100%"></img></div>
+<div align="left"><img src="./assets/fv_logs_path.png" style="width:100%"></img></div>
 
 
-# The output file format of FV (federated validation) result.json
+# Output result.json after the FV is done
 
 `result.json` 內容為一個json obejct，此object包含了2個json object，分別是metadata和
 results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖表。
+
+`result.json` 被放在開發者的PI創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)指定的output路徑。如下
+
+<div align="left"><img src="./assets/fv_output_path.png" style="width:100%"></img></div>
+
+以下介紹`result.json`的內容
+
+# The output file format of FV (federated validation) result.json
 
 * metadata目前僅一項基本資訊即datasetSize，代表驗證用的資料集其大小。
 
@@ -416,10 +425,21 @@ Hello-FV 主要由python撰寫，讓開發者學習Ailabs's FV framework，Hello
 
 * **-v /var/model/model_weight.ckpt:/model_weight.ckpt** : The location of model's weight. Put the MNIST's model weight downloaded at **/var/model_weight.ckpt **.
 
-* **-v /var/output:/var/output** : This is the path where the container output the result of validation (**result.json**) and the progress of validation(**progress.json**).
+* **-v /var/output:/var/output** : This is the path where the container output the result of validation (**result.json**).
 
-* **-v /var/logs:/var/logs** : This is the path where the container outputs the logs of the developer's container.
+* **-v /var/logs:/var/logs** : This is the path where the container outputs the logs of the developer's container. The progress of validation(**progress.json**) should also be put in here.
 
+
+
+# Output error.log while encountering a fatal error in progress of the FV
+
+當進行FV時，除了每個階段須最少輸出一次progress.json外，當致命錯誤發生的時候，開發者的container須能夠捕捉到，並將原因以如下的json格式輸出在log目錄下，以檔名**error.log**輸出。(跟**progress.json**相同目錄底下)
+
+```json
+  {
+    error: "The reason causing the fatal error or the stack of error"
+  }
+```
 
 
 # Hello-FV 的result.json
