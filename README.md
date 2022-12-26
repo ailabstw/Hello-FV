@@ -40,7 +40,7 @@ Ailabs預期開發者會在`initialization`這個階段進行所有聯合驗證�
 <div align="left"><img src="./assets/fv_upload_datasets.png" style="width:100%"></img></div>
 
 
-## Output progress.json while the FV is in progress.
+# Output progress.json while the FV is in progress.
 
 The **progress.json**  has content as below. 
 
