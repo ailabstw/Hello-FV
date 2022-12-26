@@ -10,11 +10,11 @@ Ailabs FV framework 是由Ailabs所開發出的一套聯合驗證的框架，開
 
 
 
-## The FV (federated validation) msc
-
-<div align="left"><img src="./assets/fv_msc_1.png" style="width:100%"></img></div>
+## The FV (federated validation) diagram
 
 Here we can see what will be done while we are doing a federated validation with our Ailabs's FV framework.
+
+<div align="left"><img src="./assets/fv_msc_1.png" style="width:100%"></img></div>
 
 When a FV plan starts, the edge dashboard will automatically launch the container and start doing validation.
 
