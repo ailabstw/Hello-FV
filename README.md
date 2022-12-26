@@ -419,12 +419,22 @@ Hello-FV 主要由python撰寫，讓開發者學習Ailabs's FV framework，Hello
 * **-v /var/logs:/var/logs** : This is the path where the container outputs the logs of the developer's container.
 
 
-# Hello-FV 最終產生的result.json 如下
+
+# Hello-FV 的result.json
+
+* metadata為驗證結果中須附上的驗證基本資訊，其中datasetSize設置為10萬，因為每個數字1萬筆，共10個數字10萬筆。
+
+<div align="left"><img src="./assets/fv_result_1.png" style="width:100%"></img></div>
+
+* results為驗證結果圖型，Hello FV中將每個數字各輸出一組[f1 scores,precision,recall]以table格式呈現，一開始附上一組general case 的table是10個數字的加總平均。
+
+<div align="left"><img src="./assets/fv_result_2.png" style="width:100%"></img></div>
+
+* 再來，放置了每個數字的ROC curve 以plot格式呈現，最上附上一組general case是10個數字的加總平均。
 
 
-<div align="left"><img src="./assets/fv_result_example.png" style="width:100%"></img></div>
 
 
-# Hello-FV 最後一階段產生的progress.json 如下
+# Hello-FV 最終階段產生的progress.json 如下
 
 <div align="left"><img src="./assets/fv_progress_example.png" style="width:100%"></img></div>
