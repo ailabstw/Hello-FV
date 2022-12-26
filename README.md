@@ -216,7 +216,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
 <div align="left"><img src="./assets/fv_tables.png" style="width:100%"></img></div>
 
 
-* bars： 同table為單row表格array，差異點在多了一個衡量value的單位，且圖形的呈現為長條圖，例如，若有2個edges，其json中的bars分別如下
+* bars： 同table為單列表格array，差異點在多了一個衡量value的單位，且圖形的呈現為長條圖，例如，若有2個edges，其json中的bars分別如下
   * FV-dev.edge.1
     ```json
     {
@@ -265,7 +265,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
 <div align="left"><img src="./assets/fv_bars.png" style="width:100%"></img></div>
 
 
-* heatmaps：為N*N的陣列的array，N*N陣列中的每格為一個json number，例如，若有2個edges，其json中的heatmaps分別如下
+* heatmaps：為W * H的陣列的array，W * H陣列中的每格為一個number，例如，若有2個edges，其json中的heatmaps分別如下
   * FV-dev.edge.1
     ```json
     {
