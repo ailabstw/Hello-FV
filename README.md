@@ -10,7 +10,7 @@ Ailabs FV framework 是由Ailabs開發出的一套聯合驗證的框架，開發
 
 
 
-## The FV (federated validation) diagram
+# The FV (federated validation) diagram
 
 Here we can see what will be done while we are doing a federated validation with the Ailabs FV framework.
 
@@ -42,7 +42,7 @@ Ailabs預期開發者會在`initialization`這個階段進行所有聯合驗證�
 
 # Output progress.json while the FV is in progress.
 
-The **progress.json**  has content as below. 
+The **progress.json**  has content as below. 其中`status`為階段，`completedPercentage`為階段的完成度。
 
 * 當initialization階段的時候，progress.json須輸出如下內容，進度改變即進行更新一次。
   ```bash
@@ -79,7 +79,7 @@ The **progress.json**  has content as below.
 <div align="left"><img src="./assets/fv_output_path.png" style="width:100%"></img></div>
 
 
-## The output file format of FV (federated validation) result.json
+# The output file format of FV (federated validation) result.json
 
 `result.json` 內容為一個json obejct，此object包含了2個json object，分別是metadata和
 results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖表。
@@ -118,7 +118,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
   * title: string
   * filename: string
 
-### result.json的格式範本如下
+# result.json的格式範本如下
 
 ```json
   {
@@ -171,7 +171,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
   }
 ```
 
-## result.json 與 cloud 生成圖的對應
+# result.json 與 cloud 生成圖的對應
 
 * tables：為單列的表格array，每個edge可以呈現多單列表格，例如，若有2個edges，其json包含tables分別如下
   * FV-dev.edge.1
