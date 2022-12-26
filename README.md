@@ -26,7 +26,7 @@ At each phase, the container should output the corresponding **progress.json** t
 Ailabs 預期開發者會在`initialization`這個階段進行所有聯合驗證前的初始化動作，例如載入模型與模型權重、載入資料集等。
 下一個階段`preprocessing`被預期會進行如資料集的預先處理與再加載或其他預先處理的事項(若前處理需求可跳過此階段)，接下來的階段即`validating`，代表已進入驗證並進行中，驗證完成後進入`completed`階段。
 
-以上四個階段(除了`preprocessing`若無需求可略過)，每個階段都須要輸出一個**rogess.json**的檔案(已有則覆蓋)，以便Ailabs FV framework追蹤開發者的FV container的狀態，我們後面會在詳解**progess.json**。
+以上四個階段(除了`preprocessing`若無需求可略過)，每個階段都須要輸出一個**progess.json**的檔案(已有則覆蓋)，以便Ailabs FV framework追蹤開發者的FV container的狀態，我們後面會在詳解**progess.json**。
 
 
 # The datasets importing for FV
