@@ -37,6 +37,8 @@ Ailabs 預期開發者會在`initialization`這個階段進行所有聯合驗證
 
 開發者在進行FV操作途中會使用edge dashboard將其資料集(以zip格式)上傳[FV上傳資料集](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch5/5-2-how-to-upload-validating-datasets)，我們的edge dashboard會將開發者上傳的zip解壓縮並放到上述的指定的位置，即可開始聯合驗證下一步。
 
+<div align="left"><img src="./assets/fv_upload_datasets.png" style="width:100%"></img></div>
+
 
 ## Output progress.json while the FV is in progress
 
@@ -426,12 +428,17 @@ Hello-FV 主要由python撰寫，讓開發者學習Ailabs's FV framework，Hello
 
 <div align="left"><img src="./assets/fv_result_1.png" style="width:100%"></img></div>
 
-* results為驗證結果圖型，Hello FV中將每個數字各輸出一組[f1 scores,precision,recall]以table格式呈現，一開始附上一組general case 的table是10個數字的加總平均。
+* results為驗證結果圖型，Hello FV中將每個數字各輸出一組[f1 scores,precision,recall]以table格式呈現，一開始附的general case table是10個數字的加總平均。
 
 <div align="left"><img src="./assets/fv_result_2.png" style="width:100%"></img></div>
 
-* 再來，放置了每個數字的ROC curve 以plot格式呈現，最上附上一組general case是10個數字的加總平均。
+* 接下來放置了每個數字的confusion matrix，以heatmap格式呈現。
 
+<div align="left"><img src="./assets/fv_result_3.png" style="width:100%"></img></div>
+
+* 最後放置了每個數字的ROC curve，以plot格式呈現，最上附上一組general case是10個數字的加總平均。
+
+<div align="left"><img src="./assets/fv_result_4.png" style="width:100%"></img></div>
 
 
 
