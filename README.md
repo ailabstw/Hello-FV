@@ -345,7 +345,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
 以上FV-dev.edge.1以及FV-dev.edge.2所傳送result.json，其中的plots將會在cloud報表顯示如下圖型。
 <div align="left"><img src="./assets/fv_plots.png" style="width:100%"></img></div>
 
-* images: 若上面的圖型格式無法滿足呈現FV的數據結果，則可自行生成圖片，並由cloud來顯示，此時請開發者將影像放在output folder底下的image folder，並將資訊如以下填入result.json。例如，若有2個edges，其json中的images分別如下
+* images: 若上面的圖型格式無法滿足呈現FV的數據結果，則可自行生成圖片，並由cloud來顯示，此時請開發者將影像放在output folder底下的**images** folder，並將資訊如以下填入result.json。例如，若有2個edges，其json中的images分別如下
   * FV-dev.edge.1
 
     ```json
