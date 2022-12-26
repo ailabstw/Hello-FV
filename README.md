@@ -419,6 +419,12 @@ Hello-FV 主要由python撰寫，讓開發者學習Ailabs's FV framework，Hello
 * **-v /var/logs:/var/logs** : This is the path where the container outputs the logs of the developer's container.
 
 
-# Hello-FV 產生的result.json 如下
+# Hello-FV 最終產生的result.json 如下
 
 
+<div align="left"><img src="./assets/fv_result_example.png" style="width:100%"></img></div>
+
+
+# Hello-FV 最後一階段產生的progress.json 如下
+
+<div align="left"><img src="./assets/fv_progress_example.png" style="width:100%"></img></div>
