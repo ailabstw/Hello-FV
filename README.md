@@ -397,10 +397,10 @@ Hello-FV 主要由python撰寫，讓開發者學習Ailabs's FV framework，Hello
 
 請準備一個Ubuntu 20.04的環境，且docker環境已經被安裝好。
 
-* 請從Pytorch官方下載MNIST資料集，或可經由我們的連結[mnist_dataset.zip]()下載，下載完成請解壓縮，並將解壓縮後的MNIST資料夾放到
+* 請從Pytorch官方下載MNIST資料集，或可經由我們的連結([mnist_dataset.zip]())下載，下載完成請解壓縮，並將解壓縮後的MNIST資料夾放到
 `/var/data`下。
 
-* 請下載Ailabs所提供MNIST的model weight[model_weight.ckpt]()，下載完請確認檔名為`model_weight.ckpt`並放在 `/var/model`底下，即`/var/model/model_weight.ckpt`可讀取到MNIST's model weight。
+* 請下載Ailabs所提供MNIST的model weight([model_weight.ckpt]())，下載完請確認檔名為`model_weight.ckpt`並放在 `/var/model`底下，即`/var/model/model_weight.ckpt`可讀取到MNIST's model weight。
 
 * 在command line 輸入以下指令啟動Hello-FL已經預先build出來的image
 
@@ -423,7 +423,7 @@ Hello-FV 主要由python撰寫，讓開發者學習Ailabs's FV framework，Hello
 
 * **-v /var/data:/data** : This is the path where the container load the datasets from.
 
-* **-v /var/model/model_weight.ckpt:/model_weight.ckpt** : The location of model's weight. Put the MNIST's model weight downloaded at **/var/model_weight.ckpt **.
+* **-v /var/model/model_weight.ckpt:/model_weight.ckpt** : The location of model's weight. Put the MNIST's model weight downloaded at **/var/model_weight.ckpt**.
 
 * **-v /var/output:/var/output** : This is the path where the container output the result of validation (**result.json**).
 
@@ -433,7 +433,7 @@ Hello-FV 主要由python撰寫，讓開發者學習Ailabs's FV framework，Hello
 
 # Output error.log while encountering a fatal error in progress of the FV
 
-當進行FV時，除了每個階段須最少輸出一次progress.json外，當致命錯誤發生的時候，開發者的container須能夠捕捉到，並將原因以如下的json格式輸出在log目錄下，以檔名**error.log**輸出。(跟**progress.json**相同目錄底下)
+當進行FV時，除了每個階段須最少輸出一次progress.json外（轉階段即一次），當致命錯誤發生的時候，開發者的container也須能夠捕捉到錯誤並進行error handling，並將原因以如下的json格式輸出在log目錄下，以檔名**error.log**輸出。(跟**progress.json**相同目錄底下)
 
 ```json
   {
