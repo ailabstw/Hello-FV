@@ -83,7 +83,7 @@ The **progress.json**  has content as below. 其中`status`為階段，`complete
 
 # Output error.log while encountering a fatal error in progress of the FV
 
-當進行FV時，除了每個階段須最少輸出一次progress.json外（轉階段即一次），當嚴重錯誤發生的時候，開發者的container也須能夠捕捉到錯誤並進行error handling，並將原因以如下的json格式輸出在log目錄下，以檔名**error.log**輸出。(跟**progress.json**相同目錄底下)
+當進行FV時，除了每個階段須最少輸出一次progress.json外（轉階段即輸出一次），當嚴重錯誤發生的時候，開發者的container也須能夠捕捉到錯誤並進行error handling，並將原因以如下的json格式輸出，以檔名**error.log**輸出在開發者的PI指定的logs目錄下。(跟**progress.json**相同目錄底下)
 
 ```json
   {
