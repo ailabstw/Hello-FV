@@ -435,7 +435,7 @@ Hello-FV 主要由python撰寫，讓開發者學習Ailabs's FV framework，Hello
 
 * **-v /var/data:/data** : This is the path where the container load the datasets from.
 
-* **-v /var/model/model_weight.ckpt:/model_weight.ckpt** : The location of model's weight. Put the MNIST's model weight downloaded at **/var/model_weight.ckpt**.
+* **-v /var/model/model_weight.ckpt:/var/model/model_weight.ckpt** : The location of model's weight. Put the MNIST's model weight downloaded at **/var/model/**.
 
 * **-v /var/output:/var/output** : This is the path where the container output the result of validation (**result.json**).
 
