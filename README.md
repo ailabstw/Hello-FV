@@ -421,7 +421,7 @@ Hello-FV 主要由python撰寫，讓開發者學習Ailabs's FV framework，Hello
     -e NVIDIA_VISIBLE_DEVICES=0 \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /bin/docker:/bin/docker \
-    -v /var/model/model_weight.ckpt:/model_weight.ckpt \
+    -v /var/model/model_weight.ckpt:/var/model/model_weight.ckpt \
     -v /var/data:/data \
     -v /var:/var \
     -v /var/output:/var/output \
