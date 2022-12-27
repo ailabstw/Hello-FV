@@ -75,7 +75,7 @@ The **progress.json**  has content as below. 其中`status`為階段，`complete
     }
   ```
 
-  這個**progress.json**開發者在每個階段最少須輸出一個(即進入新階段一開始)並須被放在開發者的PI創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)指定的logs路徑。如下
+  這個**progress.json**開發者在每個階段最少須輸出一個(即進入新階段一開始)並須被放在開發者的PI創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-5-how-to-setup-a-federated-validating-plan)指定的logs路徑。如下
 
 <div align="left"><img src="./assets/fv_logs_path.png" style="width:100%"></img></div>
 
@@ -97,7 +97,7 @@ The **progress.json**  has content as below. 其中`status`為階段，`complete
 `result.json` 內容為一個json obejct，此object包含了2個json object，分別是metadata和
 results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖表。
 
-`result.json` 被放在開發者的PI創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-2-how-to-setup-a-federated-validating-plan)指定的output路徑。如下
+`result.json` 被放在開發者的PI創建一個FV plan[創建一個FV plan](https://harmonia.taimedimg.com/flp/documents/fv/1.0/manuals/ch3/3-5-how-to-setup-a-federated-validating-plan)指定的output路徑。如下
 
 <div align="left"><img src="./assets/fv_output_path.png" style="width:100%"></img></div>
 
