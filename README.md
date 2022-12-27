@@ -143,49 +143,49 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
 
 ```json
   {
-    metadata:{
-      datasetSize: 1000
+    "metadata":{
+      "datasetSize": 1000
     },
-    results:{
-      tables: [
+    "results":{
+      "tables": [
         {
-          title: "Overall Table",
-          labels: ["FV accuracy"],
-          values: [0.8182],
+          "title": "Overall Table",
+          "labels": ["FV accuracy"],
+          "values": [0.8182],
         },
       ],
-      bars: [
+      "bars": [
         {
-          title: "Class 1 Bar Chart",
-          labels: ["F1 class 1 precsion"],
-          values: [0.8564],
-          y-axis: "performance",
+          "title": "Class 1 Bar Chart",
+          "labels": ["F1 class 1 precsion"],
+          "values": [0.8564],
+          "y-axis": "performance",
         },
       ],
-      heatmaps: [
+      "heatmaps": [
         {
-          title: "FV Confusion Matrix",
-          x-labels: ["FV class0","FV class1"],
-          y-labels: ["FV class0","FV class1"],
-          values: [[10,5],[2,16]],
-          x-axis: "Predition",
-          y-axis: "Ground truth",
+          "title": "FV Confusion Matrix",
+          "x-labels": ["FV class0","FV class1"],
+          "y-labels": ["FV class0","FV class1"],
+          "values": [[10,5],[2,16]],
+          "x-axis": "Predition",
+          "y-axis": "Ground truth",
         },
       ],
-      plots: [
+      "plots": [
         {
-          title: "FV Confusion Matrix",
-          labels: ["ROC curve"],
-          x-values: [[0,0.2,0,4,0,8]],
-          y-values: [[0,0.25,0.43,0.83]],
-          x-axis: "True Positive rate",
-          y-axis: "Faise Positive rate",
+          "title": "FV Confusion Matrix",
+          "labels": ["ROC curve"],
+          "x-values": [[0,0.2,0,4,0,8]],
+          "y-values": [[0,0.25,0.43,0.83]],
+          "x-axis": "True Positive rate",
+          "y-axis": "Faise Positive rate",
         }
       ],
-      images: [
+      "images": [
         {
-          title: "FV image",
-          filename: "fv-image.png"
+          "title": "FV image",
+          "filename": "fv-image.png"
         }
       ]
     }
@@ -198,17 +198,17 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
   * FV-dev.edge.1
     ```json
       {
-          results:{
-            tables: [
+          "results":{
+            "tables": [
               {
-                title: "Overall Table",
-                labels: ["FV accuracy"],
-                values: [0.8182],
+                "title": "Overall Table",
+                "labels": ["FV accuracy"],
+                "values": [0.8182],
               },
               {
-                title: "Class 1 Table",
-                labels: ["FV Class 1 recall"],
-                values: [0.8000],
+                "title": "Class 1 Table",
+                "labels": ["FV Class 1 recall"],
+                "values": [0.8000],
               }
             ]
           }
@@ -217,17 +217,17 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
   * FV-dev.edge.2
     ```json
       {
-          results:{
-            tables: [
+          "results":{
+            "tables": [
               {
-                title: "Overall Table",
-                labels: ["FV accuracy"],
-                values: [0.8964],
+                "title": "Overall Table",
+                "labels": ["FV accuracy"],
+                "values": [0.8964],
               },
               {
-                title: "Class 1 Table",
-                labels: ["FV Class 1 recall"],
-                values: [0.9000],
+                "title": "Class 1 Table",
+                "labels": ["FV Class 1 recall"],
+                "values": [0.9000],
               }
             ]
           }
@@ -241,19 +241,19 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
   * FV-dev.edge.1
     ```json
     {
-        results:{
-          bars: [
+        "results":{
+          "bars": [
             {
-              title: "Class 1 Bar Chart",
-              labels: ["F1 class 1 precsion"],
-              values: [0.8564],
-              y-axis: "performance",
+              "title": "Class 1 Bar Chart",
+              "labels": ["F1 class 1 precsion"],
+              "values": [0.8564],
+              "y-axis": "performance",
             },
             {
-              title: "Class 1 Table",
-              labels: ["F1 class 1 recall"],
-              values: [0.7450],
-              y-axis: "recall rate",
+              "title": "Class 1 Table",
+              "labels": ["F1 class 1 recall"],
+              "values": [0.7450],
+              "y-axis": "recall rate",
             }
           ]
         }
@@ -263,19 +263,19 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
   * FV-dev.edge.2
     ```json
     {
-        results:{
-          bars: [
+        "results":{
+          "bars": [
             {
-              title: "Class 1 Bar Chart",
-              labels: ["F1 class 1 precsion"],
-              values: [0.7364],
-              y-axis: "performance",
+              "title": "Class 1 Bar Chart",
+              "labels": ["F1 class 1 precsion"],
+              "values": [0.7364],
+              "y-axis": "performance",
             },
             {
-              title: "Class 1 Table",
-              labels: ["F1 class 1 recall"],
-              values: [0.6850],
-              y-axis: "recall rate",
+              "title": "Class 1 Table",
+              "labels": ["F1 class 1 recall"],
+              "values": [0.6850],
+              "y-axis": "recall rate",
             }
           ]
         }
@@ -290,15 +290,15 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
   * FV-dev.edge.1
     ```json
     {
-        results:{
-          heatmaps: [
+        "results":{
+          "heatmaps": [
             {
-              title: "FV Confusion Matrix",
-              x-labels: ["FV class0","FV class1"],
-              y-labels: ["FV class0","FV class1"],
-              values: [[10,5],[2,16]],
-              x-axis: "Predition",
-              y-axis: "Ground truth",
+              "title": "FV Confusion Matrix",
+              "x-labels": ["FV class0","FV class1"],
+              "y-labels": ["FV class0","FV class1"],
+              "values": [[10,5],[2,16]],
+              "x-axis": "Predition",
+              "y-axis": "Ground truth",
             },
           ]
         }
@@ -308,15 +308,15 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
   * FV-dev.edge.2
     ```json
     {
-        results:{
-          heatmaps: [
+        "results":{
+          "heatmaps": [
             {
-              title: "FV Confusion Matrix",
-              x-labels: ["FV class0","FV class1"],
-              y-labels: ["FV class0","FV class1"],
-              values: [[10,5],[2,16]],
-              x-axis: "Predition",
-              y-axis: "Ground truth",
+              "title": "FV Confusion Matrix",
+              "x-labels": ["FV class0","FV class1"],
+              "y-labels": ["FV class0","FV class1"],
+              "values": [[10,5],[2,16]],
+              "x-axis": "Predition",
+              "y-axis": "Ground truth",
             }
           ]
         }
@@ -330,15 +330,15 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
   * FV-dev.edge.1
 ```json
   {
-    results:{
-      plots: [
+    "results":{
+      "plots": [
         {
-          title: "FV Confusion Matrix",
-          labels: ["ROC curve"],
-          x-values: [[0,0.2,0,4,0,8]],
-          y-values: [[0,0.25,0.43,0.83]],
-          x-axis: "True Positive rate",
-          y-axis: "Faise Positive rate",
+          "title": "FV Confusion Matrix",
+          "labels": ["ROC curve"],
+          "x-values": [[0,0.2,0,4,0,8]],
+          "y-values": [[0,0.25,0.43,0.83]],
+          "x-axis": "True Positive rate",
+          "y-axis": "Faise Positive rate",
         }
       ]
     }
@@ -348,15 +348,15 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
   * FV-dev.edge.2
     ```json
       {
-        results:{
-          plots: [
+        "results":{
+          "plots": [
             {
-              title: "FV Confusion Matrix",
-              labels: ["ROC curve"],
-              x-values: [[0,0.2,0,4,0,8]],
-              y-values: [[0,0.35,0.43,0.83]],
-              x-axis: "True Positive rate",
-              y-axis: "Faise Positive rate",
+              "title": "FV Confusion Matrix",
+              "labels": ["ROC curve"],
+              "x-values": [[0,0.2,0,4,0,8]],
+              "y-values": [[0,0.35,0.43,0.83]],
+              "x-axis": "True Positive rate",
+              "y-axis": "Faise Positive rate",
             }
           ]
         }
@@ -371,11 +371,11 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
 
     ```json
     {
-      results:{
-        images: [
+      "results":{
+        "images": [
           {
-            title: "FV image",
-            filename: "fv-image.png",
+            "title": "FV image",
+            "filename": "fv-image.png",
           }
         ]
       }
@@ -385,11 +385,11 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
   * FV-dev.edge.2
     ```json
       {
-        results:{
-          images: [
+        "results":{
+          "images": [
             {
-              title: "FV image",
-              filename: "fv-image.png",
+              "title": "FV image",
+              "filename": "fv-image.png",
             }
           ]
         }
