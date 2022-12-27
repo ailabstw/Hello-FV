@@ -87,7 +87,7 @@ The **progress.json**  has content as below. 其中`status`為階段，`complete
 
 ```json
   {
-    error: "The reason causing the fatal error or the stack of error"
+    "error": "The reason causing the fatal error or the stack of error",
   }
 ```
 
