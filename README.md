@@ -409,10 +409,10 @@ Hello-FV 主要由python撰寫，讓開發者學習Ailabs's FV framework，Hello
 
 請準備一個Ubuntu 20.04的環境，且docker環境已經被安裝好。
 
-* 請從Pytorch官方下載MNIST資料集，或可經由我們的連結([mnist_dataset.zip]())下載，下載完成請解壓縮，並將解壓縮後的MNIST資料夾放到
+* 請從Pytorch官方下載MNIST資料集，或可經由我們的連結([mnist.zip](https://drive.google.com/file/d/1i5bomC_-ypbB7aX9wVUmJ8IEjaPfz4wT/view?usp=sharing))下載，下載完成請解壓縮，並將解壓縮後的MNIST資料夾放到
 `/var/data`下。
 
-* 請下載Ailabs所提供MNIST的model weight([model_weight.ckpt]())，下載完請確認檔名為`model_weight.ckpt`並放在 `/var/model`底下，即`/var/model/model_weight.ckpt`可讀取到MNIST's model weight。
+* 請下載Ailabs所提供MNIST的model weight([model_weight.ckpt](https://drive.google.com/file/d/108Z_0_2D42SxAeMjK8nzSThieQB8-5Dl/view?usp=sharing))，下載完請確認檔名為`model_weight.ckpt`並放在 `/var/model`底下，即`/var/model/model_weight.ckpt`可讀取到MNIST's model weight。
 
 * 在command line 輸入以下指令啟動Hello-FL已經預先build出來的image
 
