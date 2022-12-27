@@ -151,7 +151,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
         {
           title: "Overall Table",
           labels: ["FV accuracy"],
-          values: [0.8182]
+          values: [0.8182],
         },
       ],
       bars: [
@@ -175,7 +175,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
       plots: [
         {
           title: "FV Confusion Matrix",
-          labels: ["ROC curve"]
+          labels: ["ROC curve"],
           x-values: [[0,0.2,0,4,0,8]],
           y-values: [[0,0.25,0.43,0.83]],
           x-axis: "True Positive rate",
@@ -184,7 +184,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
       ],
       images: [
         {
-          title: "FV image"
+          title: "FV image",
           filename: "fv-image.png"
         }
       ]
@@ -203,12 +203,12 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
               {
                 title: "Overall Table",
                 labels: ["FV accuracy"],
-                values: [0.8182]
+                values: [0.8182],
               },
               {
                 title: "Class 1 Table",
                 labels: ["FV Class 1 recall"],
-                values: [0.8000]
+                values: [0.8000],
               }
             ]
           }
@@ -222,12 +222,12 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
               {
                 title: "Overall Table",
                 labels: ["FV accuracy"],
-                values: [0.8964]
+                values: [0.8964],
               },
               {
                 title: "Class 1 Table",
                 labels: ["FV Class 1 recall"],
-                values: [0.9000]
+                values: [0.9000],
               }
             ]
           }
@@ -252,7 +252,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
             {
               title: "Class 1 Table",
               labels: ["F1 class 1 recall"],
-              values: [0.7450]
+              values: [0.7450],
               y-axis: "recall rate",
             }
           ]
@@ -274,7 +274,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
             {
               title: "Class 1 Table",
               labels: ["F1 class 1 recall"],
-              values: [0.6850]
+              values: [0.6850],
               y-axis: "recall rate",
             }
           ]
@@ -328,22 +328,22 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
 
 * plots: 多個折線圖的array，每個折線圖有多條折線，每個折線有一組x-axis的values和一組y-axis的values，每個折線的某個x-axis value會對應到同index的y-axis的value，labels則為每個折線圖的名稱，例如，若有2個edges，其json中的plots分別如下
   * FV-dev.edge.1
-    ```json
-      {
-        results:{
-          plots: [
-            {
-              title: "FV Confusion Matrix",
-              labels: ["ROC curve"]
-              x-values: [[0,0.2,0,4,0,8]],
-              y-values: [[0,0.25,0.43,0.83]],
-              x-axis: "True Positive rate",
-              y-axis: "Faise Positive rate",
-            }
-          ]
+```json
+  {
+    results:{
+      plots: [
+        {
+          title: "FV Confusion Matrix",
+          labels: ["ROC curve"],
+          x-values: [[0,0.2,0,4,0,8]],
+          y-values: [[0,0.25,0.43,0.83]],
+          x-axis: "True Positive rate",
+          y-axis: "Faise Positive rate",
         }
-      }
-    ```
+      ]
+    }
+  }
+```
 
   * FV-dev.edge.2
     ```json
@@ -352,7 +352,7 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
           plots: [
             {
               title: "FV Confusion Matrix",
-              labels: ["ROC curve"]
+              labels: ["ROC curve"],
               x-values: [[0,0.2,0,4,0,8]],
               y-values: [[0,0.35,0.43,0.83]],
               x-axis: "True Positive rate",
@@ -374,8 +374,8 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
       results:{
         images: [
           {
-            title: "FV image"
-            filename: "fv-image.png"
+            title: "FV image",
+            filename: "fv-image.png",
           }
         ]
       }
@@ -388,8 +388,8 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
         results:{
           images: [
             {
-              title: "FV image"
-              filename: "fv-image.png"
+              title: "FV image",
+              filename: "fv-image.png",
             }
           ]
         }
