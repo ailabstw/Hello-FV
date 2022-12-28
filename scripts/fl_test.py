@@ -103,7 +103,7 @@ if __name__ == "__main__":
         dataset = datasets.MNIST('/data', train=False, download=False, transform=transform)
     except Exception as err:
         with open('/var/logs/error.log', 'a') as fd:
-            fd.write(f"load dataset failed: " + str(err))
+            fd.write(f"load dataset failed: " + err))
         os._exit(os.EX_OK)
 
     test_loader = torch.utils.data.DataLoader(dataset, **test_kwargs)
@@ -115,7 +115,7 @@ if __name__ == "__main__":
         model.load_state_dict(torch.load("/var/model/merge.ckpt")["state_dict"])
     except Exception as err:
         with open('/var/logs/error.log', 'a') as fd:
-            fd.write(f"load model failed: " + str(err))
+            fd.write(f"load model failed: " + err))
         os._exit(os.EX_OK)
 
     model.eval()
@@ -150,7 +150,7 @@ if __name__ == "__main__":
 
         except Exception as err:
             with open('/var/logs/error.log', 'a') as fd:
-                fd.write(f"validating failed: " + str(err))
+                fd.write(f"validating failed: " + err))
             os._exit(os.EX_OK)
 
         general_confusion_matrix = [[0,0],[0,0]]
@@ -202,57 +202,57 @@ if __name__ == "__main__":
                     {
                         "title": "average evaluation metrics",
                         "labels":["f1","precision","recall"],
-                        "values": [str(general_f1_score),str(general_precision),str(general_recall)]
+                        "values": [general_f1_score),general_precision),general_recall)]
                     },
                     {
                         "title": "Number 0 evaluation metrics",
-                        "cols": ["f1", "precision", "recall"],
-                        "values": [str(f1_score_list[0]),str(precision_list[0]),str(recall_list[0])]
+                        "labels": ["f1", "precision", "recall"],
+                        "values": [f1_score_list[0],precision_list[0],recall_list[0]]
                     },
                     {
                         "title": "Number 1 evaluation metrics",
-                        "cols": ["f1", "precision", "recall"],
-                        "values": [str(f1_score_list[1]),str(precision_list[1]),str(recall_list[1])]
+                        "labels": ["f1", "precision", "recall"],
+                        "values": [f1_score_list[1],precision_list[1],recall_list[1]]
                     },
                     {
                         "title": "Number 2 evaluation metrics",
-                        "cols": ["f1", "precision", "recall"],
-                        "values": [str(f1_score_list[2]),str(precision_list[2]),str(recall_list[2])]
+                        "labels": ["f1", "precision", "recall"],
+                        "values": [f1_score_list[2],precision_list[2],recall_list[2]]
                     },
                     {
                         "title": "Number 3 evaluation metrics",
-                        "cols": ["f1", "precision", "recall"],
-                        "values": [str(f1_score_list[3]),str(precision_list[3]),str(recall_list[3])]
+                        "labels": ["f1", "precision", "recall"],
+                        "values": [f1_score_list[3],precision_list[3],recall_list[3]]
                     },
                     {
                         "title": "Number 4 evaluation metrics",
-                        "cols": ["f1", "precision", "recall"],
-                        "values": [str(f1_score_list[4]),str(precision_list[4]),str(recall_list[4])]
+                        "labels": ["f1", "precision", "recall"],
+                        "values": [f1_score_list[4],precision_list[4],recall_list[4]]
                     },
                     {
                         "title": "Number 5 evaluation metrics",
-                        "cols": ["f1", "precision", "recall"],
-                        "values": [str(f1_score_list[5]),str(precision_list[5]),str(recall_list[5])]
+                        "labels": ["f1", "precision", "recall"],
+                        "values": [f1_score_list[5],precision_list[5],recall_list[5]]
                     },
                     {
                         "title": "Number 6 evaluation metrics",
-                        "cols": ["f1", "precision", "recall"],
-                        "values": [str(f1_score_list[6]),str(precision_list[6]),str(recall_list[6])]
+                        "labels": ["f1", "precision", "recall"],
+                        "values": [f1_score_list[6],precision_list[6],recall_list[6]]
                     },
                     {
                         "title": "Number 7 evaluation metrics",
-                        "cols": ["f1", "precision", "recall"],
-                        "values": [str(f1_score_list[7]),str(precision_list[7]),str(recall_list[7])]
+                        "labels": ["f1", "precision", "recall"],
+                        "values": [f1_score_list[7],precision_list[7],recall_list[7]]
                     },
                     {
                         "title": "Number 8 evaluation metrics",
-                        "cols": ["f1", "precision", "recall"],
-                        "values": [str(f1_score_list[8]),str(precision_list[8]),str(recall_list[8])]
+                        "labels": ["f1", "precision", "recall"],
+                        "values": [f1_score_list[8],precision_list[8],recall_list[8]]
                     },
                     {
                         "title": "Number 9 evaluation metrics",
-                        "cols": ["f1", "precision", "recall"],
-                        "values": [str(f1_score_list[9]),str(precision_list[9]),str(recall_list[9])]
+                        "labels": ["f1", "precision", "recall"],
+                        "values": [f1_score_list[9],precision_list[9],recall_list[9]]
                     },
                 ],
                 "heatmaps":[
