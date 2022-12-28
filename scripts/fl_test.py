@@ -104,7 +104,7 @@ if __name__ == "__main__":
     except Exception as err:
         with open('/var/logs/error.log', 'a') as fd:
             fd.write(f"load dataset failed: " + str(err))
-            os._exit(os.EX_OK)
+        os._exit(os.EX_OK)
 
     test_loader = torch.utils.data.DataLoader(dataset, **test_kwargs)
     model = Net().to(device)
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     except Exception as err:
         with open('/var/logs/error.log', 'a') as fd:
             fd.write(f"load model failed: " + str(err))
-            os._exit(os.EX_OK)
+        os._exit(os.EX_OK)
 
     model.eval()
     y_pred = []
@@ -151,7 +151,7 @@ if __name__ == "__main__":
         except Exception as err:
             with open('/var/logs/error.log', 'a') as fd:
                 fd.write(f"validating failed: " + str(err))
-                os._exit(os.EX_OK)
+            os._exit(os.EX_OK)
 
         general_confusion_matrix = [[0,0],[0,0]]
         precision_list = []
