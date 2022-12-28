@@ -426,7 +426,7 @@ Hello-FV 主要由python撰寫，讓開發者學習Ailabs's FV framework，Hello
     -v /var:/var \
     -v /var/output:/var/output \
     -v /var/logs:/var/logs \
-    registry.corp.ailabs.tw/federated-learning/hello-fv/edge:1.1.1
+    registry.corp.ailabs.tw/federated-learning/hello-fv/edge:1.1.2
   ```
 
 我們所提供上述的啟動指令，其中幾個比較重要的參數意義如下
