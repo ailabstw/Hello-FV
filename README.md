@@ -207,8 +207,8 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
               },
               {
                 "title": "Class 1 Table",
-                "labels": ["FV Class 1 recall"],
-                "values": [0.8000],
+                "labels": ["FV Class 1 precision","FV Class 1 recall"],
+                "values": [0.8889,0.8000],
               }
             ]
           }
@@ -226,8 +226,8 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
               },
               {
                 "title": "Class 1 Table",
-                "labels": ["FV Class 1 recall"],
-                "values": [0.9000],
+                "labels": ["FV Class 1 precision","FV Class 1 recall"],
+                "values": [0.7879,0.9000],
               }
             ]
           }
@@ -245,16 +245,16 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
           "bars": [
             {
               "title": "Class 1 Bar Chart",
-              "labels": ["F1 class 1 precsion"],
-              "values": [0.8564],
+              "labels": ["FV class 1 precsion","FV class 1 recall"],
+              "values": [0.8764,0.7450],
               "y-axis": "performance",
             },
             {
-              "title": "Class 1 Table",
-              "labels": ["F1 class 1 recall"],
-              "values": [0.7450],
-              "y-axis": "recall rate",
-            }
+              "title": "Class 2 Bar Chart",
+              "labels": ["FV class 2 precsion","FV class 2 recall"],
+              "values": [0.6564,0.6450],
+              "y-axis": "performance",
+            },
           ]
         }
       }
@@ -267,16 +267,17 @@ results。其中metadata為FV的基本資訊，而results為FV的驗證結果圖
           "bars": [
             {
               "title": "Class 1 Bar Chart",
-              "labels": ["F1 class 1 precsion"],
-              "values": [0.7364],
+              "labels": ["FV class 1 precsion","FV class 1 recall"],
+              "values": [0.7564,0.6850],
               "y-axis": "performance",
             },
             {
-              "title": "Class 1 Table",
-              "labels": ["F1 class 1 recall"],
-              "values": [0.6850],
-              "y-axis": "recall rate",
-            }
+              "title": "Class 2 Bar Chart",
+              "labels": ["FV class 2 precsion","FV class 2 recall"],
+              "values": [0.8544,0.8050],
+              "y-axis": "performance",
+            },
+
           ]
         }
       }
