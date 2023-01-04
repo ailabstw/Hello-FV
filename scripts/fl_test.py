@@ -103,7 +103,7 @@ if __name__ == "__main__":
         dataset = datasets.MNIST('/data', train=False, download=False, transform=transform)
     except Exception as err:
         with open('/var/logs/error.log', 'a') as fd:
-            fd.write(f"load dataset failed: " + err))
+            fd.write(f"load dataset failed: " + err)
         os._exit(os.EX_OK)
 
     test_loader = torch.utils.data.DataLoader(dataset, **test_kwargs)
@@ -115,7 +115,7 @@ if __name__ == "__main__":
         model.load_state_dict(torch.load("/var/model/merge.ckpt")["state_dict"])
     except Exception as err:
         with open('/var/logs/error.log', 'a') as fd:
-            fd.write(f"load model failed: " + err))
+            fd.write(f"load model failed: " + err)
         os._exit(os.EX_OK)
 
     model.eval()
@@ -150,7 +150,7 @@ if __name__ == "__main__":
 
         except Exception as err:
             with open('/var/logs/error.log', 'a') as fd:
-                fd.write(f"validating failed: " + err))
+                fd.write(f"validating failed: " + err)
             os._exit(os.EX_OK)
 
         general_confusion_matrix = [[0,0],[0,0]]
@@ -202,7 +202,7 @@ if __name__ == "__main__":
                     {
                         "title": "average evaluation metrics",
                         "labels":["f1","precision","recall"],
-                        "values": [general_f1_score),general_precision),general_recall)]
+                        "values": [general_f1_score,general_precision,general_recall]
                     },
                     {
                         "title": "Number 0 evaluation metrics",
