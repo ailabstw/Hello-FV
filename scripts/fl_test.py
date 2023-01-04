@@ -128,7 +128,7 @@ if __name__ == "__main__":
         "status": "validating",
         "completedPercentage": 0
     }
-    with open('/var/output/progress.json', 'w', encoding='utf-8') as f:
+    with open('/var/logs/progress.json', 'w', encoding='utf-8') as f:
         json.dump(progress, f, ensure_ascii=False, indent=4)
 
 
@@ -190,7 +190,7 @@ if __name__ == "__main__":
             "status": "completed",
             "completedPercentage": 100
         }
-        with open('/var/output/progress.json', 'w', encoding='utf-8') as f:
+        with open('/var/logs/progress.json', 'w', encoding='utf-8') as f:
             json.dump(progress, f, ensure_ascii=False, indent=4)
 
         result = {
@@ -350,7 +350,7 @@ if __name__ == "__main__":
             },
         }
 
-        with open('/var/output/result.json', 'w', encoding='utf-8') as f:
+        with open('/var/logs/result.json', 'w', encoding='utf-8') as f:
             json.dump(result, f, ensure_ascii=False, indent=4)
 
 
