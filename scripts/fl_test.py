@@ -50,7 +50,7 @@ if __name__ == "__main__":
         "status": "initialization",
         "completedPercentage": 0
     }
-    with open('/var/output/progress.json', 'w', encoding='utf-8') as f:
+    with open('/var/logs/progress.json', 'w', encoding='utf-8') as f:
         json.dump(progress, f, ensure_ascii=False, indent=4)
 
     # Training settings
@@ -93,7 +93,7 @@ if __name__ == "__main__":
         "status": "preprocessing",
         "completedPercentage": 0
     }
-    with open('/var/output/progress.json', 'w', encoding='utf-8') as f:
+    with open('/var/logs/progress.json', 'w', encoding='utf-8') as f:
         json.dump(progress, f, ensure_ascii=False, indent=4)
 
 
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     try:
         dataset = datasets.MNIST('/data', train=False, download=False, transform=transform)
     except Exception as err:
-        with open('/var/logs/error.log', 'a') as fd:
+        with open('/var/logs/error.log', 'w') as fd:
             fd.write(f"load dataset failed: " + str(err))
         os._exit(os.EX_OK)
 
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     try:
         model.load_state_dict(torch.load("/var/model/merge.ckpt")["state_dict"])
     except Exception as err:
-        with open('/var/logs/error.log', 'a') as fd:
+        with open('/var/logs/error.log', 'w') as fd:
             fd.write(f"load model failed: " + str(err))
         os._exit(os.EX_OK)
 
@@ -149,7 +149,7 @@ if __name__ == "__main__":
                     y_probobility.append(output[i][pred].cpu().numpy())
 
         except Exception as err:
-            with open('/var/logs/error.log', 'a') as fd:
+            with open('/var/logs/error.log', 'w') as fd:
                 fd.write(f"validating failed: " + str(err))
             os._exit(os.EX_OK)
 
