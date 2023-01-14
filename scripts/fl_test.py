@@ -112,7 +112,7 @@ if __name__ == "__main__":
 
     # load testing model weight
     try:
-        model.load_state_dict(torch.load("/var/model/merge.ckpt")["state_dict"])
+        model.load_state_dict(torch.load("/var/model/weight.ckpt")["state_dict"])
     except Exception as err:
         with open('/var/logs/error.log', 'w') as fd:
             fd.write(f"load model failed: " + str(err))
