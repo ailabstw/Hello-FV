@@ -6,9 +6,8 @@ variables:
   RELEASE_EDGE_LAB4_IMAGE: $LAB4_HARBOR_REGISTRY/group-medical/harmonia/tmi-thor/fed-learning-edge:$CI_COMMIT_TAG
   BRANCH_EDGE_IMAGE: $CI_REGISTRY_IMAGE/edge:$CI_COMMIT_REF_NAME
   BRANCH_EDGE_LAB4_IMAGE: $LAB4_HARBOR_REGISTRY/group-medical/harmonia/tmi-thor/fed-learning-edge:$CI_COMMIT_REF_NAME
-  FL_EDGE_DOCKERFILE: dockerfile/Dockerfile.fl.edge
-  FV_EDGE_DOCKERFILE_GPU: dockerfile/Dockerfile.fl.edge.gpu
-  FV_EDGE_DOCKERFILE_CPU: dockerfile/Dockerfile.fl.edge.cpu
+  FV_EDGE_DOCKERFILE_GPU: dockerfile/Dockerfile.fv.edge.gpu
+  FV_EDGE_DOCKERFILE_CPU: dockerfile/Dockerfile.fv.edge.cpu
 
 services:
   - docker:dind
